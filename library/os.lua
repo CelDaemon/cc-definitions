@@ -1,6 +1,7 @@
---- @meta os
+--- @meta _
 
 --- The [`os`](lua://os) API allows interacting with the current computer.
+--- @class os
 os = {}
 
 --- Loads the given API into the global environment.
@@ -322,3 +323,5 @@ function os.epoch(args) end
 --- @param time number? The timestamp to convert to a string. This defaults to the current time.
 --- @return string | table # The resulting formated string, or table.
 function os.date(format, time) end
+
+return os

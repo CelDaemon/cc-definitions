@@ -1,4 +1,4 @@
---- @meta vector
+--- @meta _
 
 --- A basic 3D vector type and some common vector operations. 
 --- This may be useful when working with coordinates in Minecraft's world (such as those from the [`gps`](lua://gps) API).
@@ -138,3 +138,5 @@ function vector:tostring() end
 --- @param other Vector The second vector to compare to.
 --- @return boolean # Whether or not the vectors are equal.
 function vector:equals(other) end
+
+return vector

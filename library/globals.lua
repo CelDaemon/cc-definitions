@@ -1,7 +1,8 @@
---- @meta _G
+--- @meta _
 
 --- Functions in the global environment, defined in `bios.lua`. This does not
 --- include standard Lua functions.
+--- @class _G
 _G = {}
 
 --- Pauses execution for the specified number of seconds.
@@ -31,7 +32,7 @@ _G = {}
 --- 
 --- @see os.startTimer
 --- @param time number The number of seconds to sleep for, rounded up to the nearest multiple of 0.05.
-function _G.sleep(time) end
+function sleep(time) end
 
 --- Writes a line of text to the screen without a newline at the end, wrapping
 --- text if necessary.
@@ -42,7 +43,7 @@ function _G.sleep(time) end
 --- 
 --- @param text string The text to write to the string.
 --- @return number # The number of lines written.
-function _G.write(text) end
+function write(text) end
 
 --- Prints the specified values to the screen separated by spaces, wrapping if
 --- necessary. After printing, the cursor is moved to the next line.
@@ -51,7 +52,7 @@ function _G.write(text) end
 --- 
 --- @param ... any The values to print on the screen.
 --- @return number # The number of lines written.
-function _G.print(...) end
+function print(...) end
 
 
 --- Prints the specified values to the screen in red, separated by spaces,
@@ -60,7 +61,7 @@ function _G.print(...) end
 ---     printError("Something went wrong!")
 --- 
 --- @param ... any The values to print on the screen.
-function _G.printError(...) end
+function printError(...) end
 
 
 --- Reads user input from the terminal. This automatically handles arrow keys,
@@ -99,7 +100,7 @@ function _G.printError(...) end
 --- @param completeFn ?fun(partial: string): string[]? A function to be used for completion. This function should take the partial text typed so far, and returns a list of possible completion options.
 --- @param default string? Default text which should already be entered into the prompt.
 --- @return string # The text typed in.
-function _G.read(replaceChar, history, completeFn, default) end
+function read(replaceChar, history, completeFn, default) end
 
 --- Stores the current ComputerCraft and Minecraft versions.
 --- 
@@ -113,7 +114,7 @@ function _G.read(replaceChar, history, completeFn, default) end
 ---     print(_HOST)
 --- 
 --- @type string
-_G._HOST = _HOST
+_HOST = _HOST
 
 --- The default computer settings as defined in the ComputerCraft configuration.
 --- 
@@ -125,4 +126,4 @@ _G._HOST = _HOST
 ---     shell.autocomplete=false,lua.autocomplete=false,edit.autocomplete=false
 --- 
 --- @type string
-_G._CC_DEFAULT_SETTINGS = _CC_DEFAULT_SETTINGS
+_CC_DEFAULT_SETTINGS = _CC_DEFAULT_SETTINGS

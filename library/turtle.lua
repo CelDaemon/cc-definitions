@@ -1,4 +1,4 @@
---- @meta turtle
+--- @meta _
 
 
 --- Turtles are a robotic device, which can break and place blocks, attack mobs, and move about the world. 
@@ -43,7 +43,7 @@
 --- Some peripherals (namely [speakers](lua://speaker) and Ender and Wireless [modems](lua://modem)) can also be equipped as
 --- upgrades. These are then accessible by accessing the `"left"` or `"right"` peripheral.
 --- 
---- @type table?
+--- @class turtle
 turtle = {}
 
 --- Craft a recipe based on the turtle's inventory.
@@ -492,3 +492,5 @@ function turtle.inspectDown() end
 --- @param detailed boolean? Whether to include "detailed" information. When true the method will contain much more information about the item at the cost of taking longer to run.
 --- @return table? # Information about the given slot, or nil if it is empty.
 function turtle.getItemDetail(slot, detailed) end
+
+return turtle
