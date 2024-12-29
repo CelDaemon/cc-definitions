@@ -1,5 +1,7 @@
 {
     "$schema": "https://raw.githubusercontent.com/LuaLS/LLS-Addons/main/schemas/addon_config.schema.json",
+    "name": "ComputerCraft",
+    "words": ["turtle%.%w+"],
     "settings": {
         "Lua.diagnostics.groupFileStatus": {
             "strong": "Any"
