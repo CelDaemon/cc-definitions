@@ -27,6 +27,7 @@
             "utf8": "disable",
             "builtin": "enable",
             "string": "disable"
-        }
+        },
+        "Lua.runtime.version": "Lua 5.1"
     }
 }
