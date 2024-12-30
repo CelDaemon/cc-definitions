@@ -49,14 +49,14 @@ function debug.gethook(co) end
 --- 
 --- @nodiscard
 --- @param thread thread The thread to return the info of.
---- @param f number | async fun(...):... The function to return the info of.
+--- @param f number | async fun(...): ... The function to return the info of.
 --- @param what infowhat? What info to return.
 --- @return debuginfo # The function info.
 function debug.getinfo(thread, f, what) end
 --- Returns a table with information about a function.
 --- 
 --- @nodiscard
---- @param f number | async fun(...):... The function to return the info of.
+--- @param f number | async fun(...): ... The function to return the info of.
 --- @param what infowhat? What info to return.
 --- @return debuginfo # The function info.
 function debug.getinfo(f, what) end
@@ -65,7 +65,7 @@ function debug.getinfo(f, what) end
 --- 
 --- @nodiscard
 --- @param thread thread The thread to return the local of.
---- @param f number | async fun(...):... The function to return the local of.
+--- @param f number | async fun(...): ... The function to return the local of.
 --- @param index number The index of the local.
 --- @return string name The name of the local.
 --- @return any value The value of the local.
@@ -74,7 +74,7 @@ function debug.getlocal(thread, f, index) end
 --- Returns the name and the value of the local variable with index `local` of the function at level `f` of the stack.
 --- 
 --- @nodiscard
---- @param f number | async fun(...):... The function to return the local of.
+--- @param f number | async fun(...): ... The function to return the local of.
 --- @param index number The index of the local.
 --- @return string name The name of the local.
 --- @return any value The value of the local.
@@ -99,7 +99,7 @@ function debug.getregistry() end
 --- Returns the name and the value of the upvalue with index `up` of the function.
 --- 
 --- @nodiscard
---- @param f async fun(...):... The function to return the upvalue from.
+--- @param f async fun(...): ... The function to return the upvalue from.
 --- @param up number The id of the upvalue.
 --- @return string name The name of the upvalue.
 --- @return any value The value of the upvalue.
@@ -122,14 +122,14 @@ function debug.setfenv(object, env) end
 --- Sets the given function as a hook.
 --- 
 --- @param thread thread The thread to set the hook for.
---- @param hook async fun(...):... The hook to be called.
+--- @param hook async fun(...): ... The hook to be called.
 --- @param mask hookmask The mask to hook into.
 --- @param count number? The count of the hook.
 function debug.sethook(thread, hook, mask, count) end
 
 --- Sets the given function as a hook.
 --- 
---- @param hook async fun(...):... The hook to be called.
+--- @param hook async fun(...): ... The hook to be called.
 --- @param mask hookmask The mask to hook into.
 --- @param count number? The count of the hook.
 function debug.sethook(hook, mask, count) end
@@ -171,7 +171,7 @@ function debug.setmetatable(value, meta) end
 
 --- Assigns the `value` to the upvalue with index `up` of the function.
 ---
---- @param f async fun(...):... # The function to set the upvalue for.
+--- @param f async fun(...): ... The function to set the upvalue for.
 --- @param up number The id of the upvalue.
 --- @param value any The new value of the upvalue.
 --- @return string name The name of the upvalue.
