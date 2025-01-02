@@ -44,17 +44,16 @@ function error(message, level) end
 --- 
 --- @deprecated Use debug.getfenv instead.
 --- @nodiscard
---- @param f number | async fun(...): ...
---- @return table
+--- @param f number | async fun(...): ... The function to get the environment table from.
+--- @return table # The function's environment table.
 function getfenv(f) end
 
 --- If object does not have a metatable, returns nil. 
 --- Otherwise, if the object's metatable has a __metatable field, returns the associated value. Otherwise, returns the metatable of the given object.
 --- 
---- @deprecated Use debug.getmetatable instead.
 --- @nodiscard
 --- @param object any The object to get the metatable from.
---- @return table metatable The metatable attached to the object.
+--- @return metatable metatable The metatable attached to the object.
 function getmetatable(object) end
 
 --- Returns three values (an iterator function, the table `t`, and `0`) so that the construction
@@ -162,3 +161,172 @@ function pairs(t) end
 --- @return any | string error The first returned value of the function when succeeded, or the error message on failure.
 --- @return any ... The remaining values returned from the function.
 function pcall(f, ...) end
+
+--- Checks whether v1 is equal to v2, without invoking the `__eq` metamethod.
+--- 
+--- @nodiscard
+--- @param v1 any The value to check from.
+--- @param v2 any The value to check against.
+--- @return boolean # Whether v1 is equal to v2.
+function rawequal(v1, v2) end
+
+--- Gets the real value of `table[index]`, without invoking the `__index` metamethod.'
+--- 
+--- @nodiscard
+--- @generic K The key type in the table.
+--- @generic V The value type in the table.
+--- @param table table<K, V> The table to get the value from.
+--- @param index K The index of the value to get.
+--- @return V # The indexed value from the table.
+function rawget(table, index) end
+
+--- Returns the length of the object `v`, without invoking the `__len` metamethod.
+--- 
+--- @nodiscard
+--- @param v table | string The value to check the length of.
+--- @return number length The length of the value.
+function rawlen(v) end
+
+--- Sets the real value of `table[index]` to `value`, without using the `__newindex` metavalue. `table` must be a table, `index` any value different from `nil` and `NaN`, and `value` any Lua value.
+--- This function returns `table`.
+--- 
+--- @param table table The table to set the value of.
+--- @param index any The index of the value to set.
+--- @param value any The value to set.
+--- @return table
+function rawset(table, index, value) end
+
+--- If `index` is a number, returns all arguments after argument number `index`; a negative number indexes from the end (`-1` is the last argument). 
+--- Otherwise, `index` must be the string `"#"`, and `select` returns the total number of extra arguments it received.
+--- 
+--- @nodiscard
+--- @param index number The index to start returning arguments from.
+--- @param ... any The arguments to return.
+--- @return any ... The arguments passed in, starting with the provided index.
+function select(index, ...) end
+
+--- If `index` is a number, returns all arguments after argument number `index`; a negative number indexes from the end (`-1` is the last argument). 
+--- Otherwise, `index` must be the string `"#"`, and `select` returns the total number of extra arguments it received.
+--- 
+--- @nodiscard
+--- @param index "#" The index to start returning arguments from.
+--- @param ... any The arguments to return.
+--- @return number count The amount of arguments passed in.
+function select(index, ...) end
+
+--- Sets the environment to be used by the given function.
+--- 
+--- @deprecated Use debug.setfenv instead.
+--- 
+--- @nodiscard
+--- @param f integer | async fun(...): ... The function whose environment to set.
+--- @param table table The new environment table.
+--- @return function # The modified function.
+function setfenv(f, table) end
+
+
+--- @alias mode
+--- | 'k' # Weak key.
+--- | "v" # Weak value.
+--- | "kv" # Ephemeral table.
+
+--- @class metatable
+--- @field __name string?
+--- @field __mode mode?
+--- @field __metatable any?
+--- @field __tostring (fun(t): string)?
+--- @field __gc fun(t)?
+--- @field __add (fun(t1, t2): any)?
+--- @field __sub (fun(t1, t2): any)?
+--- @field __mul (fun(t1, t2): any)?
+--- @field __div (fun(t1, t2): any)?
+--- @field __mod (fun(t1, t2): any)?
+--- @field __pow (fun(t1, t2): any)?
+--- @field __unm (fun(t): any)?
+--- @field __concat (fun(t1, t2): any)?
+--- @field __len (fun(t): number)?
+--- @field __eq (fun(t1, t2): boolean)?
+--- @field __lt (fun(t1, t2): boolean)?
+--- @field __le (fun(t1, t2): boolean)?
+--- @field __index table | (fun(t, k): any)?
+--- @field __newindex table | fun(t, k, v)?
+--- @field __call (fun(t, ...): ...)?
+--- @field __pairs (fun(t): ((fun(t, k, v): any, any), any, any))?
+
+
+--- Sets the metatable for the given table. If `metatable` is `nil`, removes the metatable of the given table. 
+--- If the original metatable has a `__metatable` field, raises an error.
+--- 
+--- This function returns `table`.
+--- 
+--- To change the metatable of other types from Lua code, you must use the debug library (§6.10).
+--- 
+--- @param table table The table to set the metatable of.
+--- @param metatable metatable? The new metatable to set.
+--- @return table # The modified table.
+function setmetatable(table, metatable) end
+
+--- When called with no `base`, `tonumber` tries to convert its argument to a number. 
+--- If the argument is already a number or a string convertible to a number, then `tonumber` returns this number; otherwise, it returns `fail`.
+--- 
+--- @nodiscard
+--- @param e any The value to convert to a number.
+--- @param base number? The base to convert the value to.
+--- @return number? # The converted number, or `nil` if conversion failed.
+function tonumber(e, base) end
+
+--- Receives a value of any type and converts it to a string in a human-readable format.
+--- 
+--- If the metatable of `v` has a `__tostring` field, then `tostring` calls the corresponding value with `v` as argument, and uses the result of the call as its result. 
+--- Otherwise, if the metatable of `v` has a `__name` field with a string value, `tostring` may use that string in its final result.
+--- 
+--- For complete control of how numbers are converted, use $string.format.
+--- 
+--- @nodiscard
+--- @param v any The value to convert to a string.
+--- @return string # The converted string.
+function tostring(v) end
+
+
+
+--- @alias type
+--- | "nil"
+--- | "number"
+--- | "string"
+--- | "boolean"
+--- | "table"
+--- | "function"
+--- | "thread"
+--- | "userdata"
+
+--- Returns the type of its only argument, coded as a string. 
+--- The possible results of this function are `"nil"` (a string, not the value `nil`), `"number"`, `"string"`, `"boolean"`, `"table"`, `"function"`, `"thread"`, and `"userdata"`.
+--- 
+--- @nodiscard
+--- @param v any The value to get the type of.
+--- @return type # The type of the provided value.
+function type(v) end
+
+
+--- A global variable (not a function) that holds a string containing the running Lua version.
+_VERSION = "Lua 5.2"
+
+--- Calls function `f` with the given arguments in protected mode with a new message handler.
+--- 
+--- @param f async fun(...): ... The function to call.
+--- @param msgh fun(error: string) The error handler when the protected thread errors.
+--- @param ... any Arguments to call the function with.
+--- @return any ... The arguments returned from the function.
+function xpcall(f, msgh, ...) end
+
+--- Returns the elements from the given `list`. This function is equivalent to
+--- 
+---     return list[i], list[i+1], ···, list[j]
+--- 
+---
+--- @nodiscard
+--- @param list table The table to unpack arguments from.
+--- @param i number? The starting index.
+--- @param j number? The ending index.
+--- @return any ... The unpacked arguments.
+function unpack(list, i, j) end

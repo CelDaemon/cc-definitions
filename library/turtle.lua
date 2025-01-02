@@ -1,4 +1,4 @@
---- @meta _
+--- @meta turtle
 
 
 --- Turtles are a robotic device, which can break and place blocks, attack mobs, and move about the world. 
@@ -43,7 +43,7 @@
 --- Some peripherals (namely [speakers](lua://speaker) and Ender and Wireless [modems](lua://modem)) can also be equipped as
 --- upgrades. These are then accessible by accessing the `"left"` or `"right"` peripheral.
 --- 
---- @class turtle
+--- @class turtlelib
 turtle = {}
 
 --- Craft a recipe based on the turtle's inventory.

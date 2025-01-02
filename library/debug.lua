@@ -1,4 +1,4 @@
---- @meta _
+--- @meta debug
 
 --- @class debuglib
 debug = {}

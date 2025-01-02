@@ -1,4 +1,4 @@
---- @meta _
+--- @meta coroutine
 
 --- @class coroutinelib
 coroutine = {}
@@ -56,3 +56,5 @@ function coroutine.wrap(f) end
 --- @async
 --- @return any ...
 function coroutine.yield(...) end
+
+return coroutine

@@ -1,4 +1,4 @@
---- @meta _
+--- @meta disk
 
 --- Interact with disk drives.
 --- 
@@ -9,7 +9,7 @@
 --- > Tip:
 --- > All computers (except command computers), turtles and pocket computers 
 --- > can be placed within a disk drive to access it's internal storage like a disk.
---- @class disk
+--- @class disklib
 disk = {}
 
 --- Checks whether any item at all is in the disk drive.
