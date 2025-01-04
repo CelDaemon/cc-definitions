@@ -58,7 +58,9 @@ function getmetatable(object) end
 
 --- Returns three values (an iterator function, the table `t`, and `0`) so that the construction
 --- 
----     for i,v in ipairs(t) do body end
+--- ```lua
+--- for i,v in ipairs(t) do body end
+--- ```
 --- 
 --- will iterate over the key–value pairs `(1,t[1]), (2,t[2]), ...`, up to the first absent index.
 --- 
@@ -136,7 +138,9 @@ function next(table, index) end
 --- 
 --- Otherwise, returns three values: the [next](command:extension.lua.doc?["en-us/54/manual.html/pdf-next"]) function, the table `t`, and `nil`, so that the construction
 --- 
----     for k,v in pairs(t) do body end
+--- ```lua
+--- for k,v in pairs(t) do body end
+--- ```
 --- 
 --- will iterate over all key–value pairs of table `t`.
 --- 
@@ -321,7 +325,9 @@ function xpcall(f, msgh, ...) end
 
 --- Returns the elements from the given `list`. This function is equivalent to
 --- 
----     return list[i], list[i+1], ···, list[j]
+--- ```lua
+--- return list[i], list[i+1], ···, list[j]
+--- ```
 --- 
 ---
 --- @nodiscard

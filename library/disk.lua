@@ -14,7 +14,9 @@ disk = {}
 
 --- Checks whether any item at all is in the disk drive.
 --- 
----     disk.isPresent("top")
+--- ```lua
+--- disk.isPresent("top")
+--- ```
 --- 
 --- @nodiscard
 --- @param name string The name of the disk drive.

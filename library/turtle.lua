@@ -341,21 +341,25 @@ function turtle.getFuelLevel() end
 --- 
 --- Refuel a turtle from the currently selected slot:
 --- 
----     local level = turtle.getFuelLevel()
----     if level == "unlimited" then error("Turtle does not need fuel", 0) end
+--- ```lua
+--- local level = turtle.getFuelLevel()
+--- if level == "unlimited" then error("Turtle does not need fuel", 0) end
 ---
----     local ok, err = turtle.refuel()
----     if ok then
----         local new_level = turtle.getFuelLevel()
----         print(("Refuelled %d, current level is %d"):format(new_level - level, new_level))
----     else
----         printError(err)
----     end
+--- local ok, err = turtle.refuel()
+--- if ok then
+---     local new_level = turtle.getFuelLevel()
+---     print(("Refuelled %d, current level is %d"):format(new_level - level, new_level))
+--- else
+---     printError(err)
+--- end
+--- ```
 --- 
 --- Check if the current item is a valid fuel source:
 --- 
----     local is_fuel, reason = turtle.refuel(0)
----     if not is_fuel then printError(reason) end
+--- ```lua
+--- local is_fuel, reason = turtle.refuel(0)
+--- if not is_fuel then printError(reason) end
+--- ```
 --- 
 --- @see turtle.getFuelLevel 
 --- @see turtle.getFuelLimit
@@ -437,17 +441,19 @@ function turtle.equipRight() end
 
 --- Get information about the block in front of the turtle.
 --- 
----     local has_block, data = turtle.inspect()
----     if has_block then
----         print(textutils.serialise(data))
----         -- {
----         --   name = "minecraft:oak_log",
----         --   state = { axis = "x" },
----         --   tags = { ["minecraft:logs"] = true, ... },
----         -- }
----     else
----         print("No block in front of the turtle")
----     end
+--- ```lua
+--- local has_block, data = turtle.inspect()
+--- if has_block then
+---     print(textutils.serialise(data))
+---     -- {
+---     --   name = "minecraft:oak_log",
+---     --   state = { axis = "x" },
+---     --   tags = { ["minecraft:logs"] = true, ... },
+---     -- }
+--- else
+---     print("No block in front of the turtle")
+--- end
+--- ```
 --- 
 --- @nodiscard
 --- @return boolean # Whether there is a block in front of the turtle.
@@ -477,11 +483,13 @@ function turtle.inspectDown() end
 --- 
 --- Print the current slot, assuming it contains 13 dirt:
 --- 
----     print(textutils.serialise(turtle.getItemDetail()))
----     -- => {
----     --  name = "minecraft:dirt",
----     --  count = 13,
----     -- }
+--- ```lua
+--- print(textutils.serialise(turtle.getItemDetail()))
+--- -- => {
+--- --  name = "minecraft:dirt",
+--- --  count = 13,
+--- -- }
+--- ```
 --- 
 --- Throws if the slot is out of range.
 --- 

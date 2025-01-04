@@ -39,24 +39,28 @@ function os.unloadAPI(name) end
 --- event, printing the error "Terminated".
 --- 
 --- Listen for `mouse_click` events:
----     
----     while true do
----         local event, button, x, y = os.pullEvent("mouse_click")
----         print("Button", button, "was clicked at", x, ",", y)
----     end
+--- 
+--- ```lua
+--- while true do
+---     local event, button, x, y = os.pullEvent("mouse_click")
+---     print("Button", button, "was clicked at", x, ",", y)
+--- end
+--- ```
 --- 
 --- Listen for multiple events:
 --- 
----     while true do
----         local eventData = {os.pullEvent()}
----         local event = eventData[1]
+--- ```lua
+--- while true do
+---     local eventData = {os.pullEvent()}
+---     local event = eventData[1]
 ---
----         if event == "mouse_click" then
----             print("Button", eventData[2], "was clicked at", eventData[3], ",", eventData[4])
----         elseif event == "key" then
----             print("Key code", eventData[2], "was pressed")
----         end
+---     if event == "mouse_click" then
+---         print("Button", eventData[2], "was clicked at", eventData[3], ",", eventData[4])
+---     elseif event == "key" then
+---         print("Key code", eventData[2], "was pressed")
 ---     end
+--- end
+--- ```
 --- 
 --- @see os.pullEventRaw To pull the terminate event.
 --- 
@@ -73,12 +77,14 @@ function os.pullEvent(filter) end
 --- 
 --- Listen for `terminate` events:
 --- 
----     while true do
----         local event = os.pullEventRaw()
----         if event == "terminate" then
----             print("Caught terminate event!")
----         end
+--- ```lua
+--- while true do
+---     local event = os.pullEventRaw()
+---     if event == "terminate" then
+---         print("Caught terminate event!")
 ---     end
+--- end
+--- ```
 --- 
 --- @see os.pullEvent To pull events normally.
 --- 
@@ -98,7 +104,9 @@ function os.sleep(time) end
 --- This is defined by `bios.lua`. For the current version of CC:Tweaked, this
 --- should return `CraftOS 1.9`.
 --- 
----     os.version()
+--- ```lua
+--- os.version()
+--- ```
 --- 
 --- @nodiscard
 --- @return string # The current CraftOS version.
@@ -117,7 +125,9 @@ function os.version() end
 --- 
 --- Run the default shell from within your program:
 --- 
----     os.run({}, "/rom/programs/shell.lua")
+--- ```lua
+--- os.run({}, "/rom/programs/shell.lua")
+--- ```
 --- 
 --- @see shell.run
 --- @see loadfile
@@ -179,9 +189,11 @@ function os.cancelAlarm(token) end
 
 
 --- Shuts down the computer immediately.
+--- 
 function os.shutdown() end
 
 --- Reboots the computer immediately.
+--- 
 function os.reboot() end
 
 --- Returns the ID of the computer.
@@ -236,7 +248,9 @@ function os.clock() end
 --- 
 --- Print the current in-game time:
 --- 
----     textutils.formatTime(os.time())
+--- ```lua
+--- textutils.formatTime(os.time())
+--- ```
 --- 
 --- @see textutils.formatTime
 --- @see os.date
@@ -275,10 +289,12 @@ function os.day(args) end
 --- 
 --- Get the current time and use date to convert it to a table:
 --- 
----     -- Dividing by 1000 converts it from milliseconds to seconds.
----     local time = os.epoch("local") / 1000
----     local time_table = os.date("*t", time)
----     print(textutils.serialize(time_table))
+--- ```lua
+--- -- Dividing by 1000 converts it from milliseconds to seconds.
+--- local time = os.epoch("local") / 1000
+--- local time_table = os.date("*t", time)
+--- print(textutils.serialize(time_table))
+--- ```
 --- 
 --- @nodiscard
 --- @param args string? The locale to get the milliseconds for. Defaults to `ingame` if not set.
@@ -299,10 +315,13 @@ function os.epoch(args) end
 --- 
 --- Print the current date in a user-friendly string:
 --- 
----     os.date("%A %d %B %Y") -- See the reference above!
+--- ```lua
+--- os.date("%A %d %B %Y") -- See the reference above!
+--- ```
 --- 
 --- Convert a timestamp to a table:
 --- 
+--- ```lua 
 ---     os.date("!*t", 1242534247)
 ---     --[=[ {
 ---         -- Date
@@ -317,6 +336,7 @@ function os.epoch(args) end
 ---         sec   = 7,
 ---         isdst = false,
 ---     } ]=]
+--- ```
 --- 
 --- @nodiscard
 --- @param format string? The format of the string to return. This defaults to `%c`, which expands to a string similar to "Sat Dec 24 16:58:00 2011".

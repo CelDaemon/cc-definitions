@@ -26,9 +26,13 @@ function vector.new(x, y, z) end
 
 --- Adds two vectors together.
 --- 
----     v1:sub(v2)
+--- ```lua
+--- v1:sub(v2)
+--- ```
 --- 
----     v1 + v2
+--- ```lua
+--- v1 + v2
+--- ```
 --- 
 --- @nodiscard
 --- @param o Vector The second vector to add.
@@ -37,9 +41,13 @@ function vector:add(o) end
 
 --- Subtracts one vector from another.
 --- 
----     v1:sub(v2)
+--- ```lua
+--- v1:sub(v2)
+--- ```
 --- 
----     v1 - v2
+--- ```lua
+--- v1 - v2
+--- ```
 --- 
 --- @nodiscard
 --- @param o Vector The vector to subtract.
@@ -49,9 +57,13 @@ function vector:sub(o) end
 
 --- Multiplies a vector by a scalar value.
 --- 
----     vector.new(1, 2, 3):mul(3)
+--- ```lua
+--- vector.new(1, 2, 3):mul(3)
+--- ```
 --- 
----     vector.new(1, 2, 3) * 3
+--- ```lua
+--- vector.new(1, 2, 3) * 3
+--- ```
 --- 
 --- @nodiscard
 --- @param factor number The scalar value to multiply with.
@@ -60,9 +72,13 @@ function vector:mul(factor) end
 
 --- Divides a vector by a scalar value.
 --- 
----     vector.new(1, 2, 3):div(3)
+--- ```lua
+--- vector.new(1, 2, 3):div(3)
+--- ```
 --- 
----     vector.new(1, 2, 3) / 3
+--- ```lua
+--- vector.new(1, 2, 3) / 3
+--- ```
 --- 
 --- @nodiscard
 --- @param factor number The scalar value to divide by.
@@ -72,7 +88,9 @@ function vector:div(factor) end
 
 --- Negate a vector
 --- 
----     -vector.new(1, 2, 3)
+--- ```lua
+--- -vector.new(1, 2, 3)
+--- ```
 --- 
 --- @nodiscard
 --- @return Vector # The negated vector.
@@ -80,7 +98,9 @@ function vector:unm() end
 
 --- Compute the dot product of two vectors
 --- 
----     v1:dot(v2)
+--- ```lua
+--- v1:dot(v2)
+--- ```
 --- 
 --- @nodiscard
 --- @param o Vector The second vector to compute the dot product of.
@@ -90,7 +110,9 @@ function vector:dot(o) end
 
 --- Compute the cross product of two vectors
 --- 
----     v1:cross(v2)
+--- ```lua
+--- v1:cross(v2)
+--- ```
 --- 
 --- @nodiscard
 --- @param o Vector The second vector to compute the cross product of.
@@ -107,7 +129,9 @@ function vector:length() end
 
 --- Divide this vector by its length, producing with the same direction, but of length 1.
 --- 
----     v:normalize()
+--- ```lua
+--- v:normalize()
+--- ```
 --- 
 --- @nodiscard
 --- @return Vector # The normalised vector
@@ -123,9 +147,13 @@ function vector:round(tolerance) end
 
 --- Convert this vector into a string, for pretty printing.
 --- 
----     v:tostring()
+--- ```lua
+--- v:tostring()
+--- ```
 --- 
----     tostring(v)
+--- ```lua
+--- tostring(v)
+--- ```
 --- 
 --- @nodiscard
 --- @return string # This vector's string representation.

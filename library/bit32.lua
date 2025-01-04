@@ -24,7 +24,9 @@ function bit32.band(...) end
 
 --- Returns the bitwise negation of `x`.
 --- 
----     assert(bit32.bnot(x) == (-1 - x) % 2^32)
+--- ```lua
+--- assert(bit32.bnot(x) == (-1 - x) % 2^32)
+--- ```
 --- 
 --- @nodiscard
 --- @param x number The number to negate.
@@ -87,7 +89,9 @@ function bit32.lrotate(x, distp) end
 --- Returns the number `x` shifted `disp` bits to the left. 
 --- Negative displacements shift to the right. In any direction, vacant bits are filled with zeros.
 --- 
----     assert(bit32.lshift(b, disp) == (b * 2^disp) % 2^32)
+--- ```lua
+--- assert(bit32.lshift(b, disp) == (b * 2^disp) % 2^32)
+--- ```
 --- 
 --- @param x number The number to shift.
 --- @param distp number The number of bits to shift by.
@@ -106,7 +110,9 @@ function bit32.rrotate(x, distp) end
 --- Returns the number `x` shifted `disp` bits to the right. 
 --- Negative displacements shift to the left. In any direction, vacant bits are filled with zeros.
 --- 
----     assert(bit32.rshift(b, disp) == math.floor(b % 2^32 / 2^disp))
+--- ```lua
+--- assert(bit32.rshift(b, disp) == math.floor(b % 2^32 / 2^disp))
+--- ```
 --- 
 --- @param x number The number to shift.
 --- @param distp number The number of bits to shift by.
