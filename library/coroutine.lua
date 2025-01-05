@@ -47,8 +47,7 @@ function coroutine.status(co) end
 --- 
 --- @nodiscard
 --- @param f async fun(...):...
---- @return fun(...):...
---- @nodiscard
+--- @return function
 function coroutine.wrap(f) end
 
 --- Suspends the execution of the calling coroutine.
