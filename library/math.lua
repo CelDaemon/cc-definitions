@@ -188,3 +188,54 @@ function math.random(m) end
 --- @param n number The maxmimum number that can be generated.
 --- @return number # The generated number.
 function math.random(m, n) end
+
+--- Generates a seed with a weak attempt for randomness.
+function math.randomseed() end
+
+--- Equate to `math.randomseed(x, 0)` .
+--- 
+--- @param x number The seed to initialise with.
+function math.randomseed(x) end
+--- Concatenate `x` and `y` into a 128-bit `seed` to reinitialize the pseudo-random generator.
+--- 
+--- @param x number The first part of the seed to initialise with.
+--- @param y number The first part of the seed to initialise with.
+function math.randomseed(x, y) end
+
+--- Returns the sine of `x` (assumed to be in radians).
+--- 
+--- @nodiscard
+--- @param x number The number to use for the sine.
+--- @return number # The calculated sine.
+function math.sin(x) end
+
+
+--- Returns the hyperbolic sine of `x` (assumed to be in radians).
+--- 
+--- @nodiscard
+--- @param x number The number to use for the sine.
+--- @return number # The calculated sine.
+function math.sinh(x) end
+
+--- Returns the square root of `x`.
+--- 
+--- @nodiscard
+--- @param x number The number to use for the square root.
+--- @return number # The calculated square root.
+function math.sqrt(x) end
+
+--- Returns the tangent of `x` (assumed to be in radians).
+--- 
+--- @nodiscard
+--- @param x number The number to use for the tangent.
+--- @return number # The calcualted tangent.
+function math.tan(x) end
+
+--- Returns the hyperbolic tangent of `x` (assumed to be in radians).
+--- 
+--- @nodiscard
+--- @param x number The number to use for the tangent.
+--- @return number # The calcualted tangent.
+function math.tanh(x) end
+
+return math
