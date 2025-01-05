@@ -1,6 +1,6 @@
 {
     "$schema": "https://raw.githubusercontent.com/LuaLS/LLS-Addons/main/schemas/addon_config.schema.json",
-    "name": "ComputerCraft",
+    "name": "CC: Tweaked",
     "words": ["turtle%.%w+"],
     "settings": {
         "Lua.diagnostics.groupFileStatus": {
@@ -28,6 +28,6 @@
             "builtin": "enable",
             "string": "disable"
         },
-        "Lua.runtime.version": "Lua 5.1"
+        "Lua.runtime.version": "Lua 5.2"
     }
 }
