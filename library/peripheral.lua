@@ -1,4 +1,4 @@
---- @meta peripheral
+--- @meta _
 
 --- @alias peripheral.name string
 --- | "front"

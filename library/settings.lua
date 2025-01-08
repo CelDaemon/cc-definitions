@@ -1,4 +1,4 @@
---- @meta settings
+--- @meta _
 
 --- @class settingslib
 settings = {}

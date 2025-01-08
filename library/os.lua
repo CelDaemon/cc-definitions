@@ -1,4 +1,4 @@
---- @meta os
+--- @meta _
 
 --- The [`os`](lua://os) API allows interacting with the current computer.
 --- @class oslib
