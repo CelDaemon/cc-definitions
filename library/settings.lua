@@ -5,12 +5,10 @@ settings = {}
 
 --- A type that is used to check the value being set to a setting.
 --- @alias settings.type
---- | "default"
 --- | "number"
 --- | "string"
 --- | "boolean"
 --- | "table"
---- | "nil"
 
 --- @alias settings.value
 --- | number
