@@ -12,13 +12,19 @@ settings = {}
 --- | "table"
 --- | "nil"
 
+--- @alias settings.value
+--- | number
+--- | string
+--- | boolean
+--- | {[any]: settings.value?}
+
 --- @class settings.setting Options for a setting.
 --- @field description string? A description which may be printed when running the `set` program.
---- @field default any? A default value, which is returned by [`settings.get`](lua://settings.get) if the setting has not been changed.
+--- @field default settings.value? A default value, which is returned by [`settings.get`](lua://settings.get) if the setting has not been changed.
 --- @field type settings.type? Require values to be of this type. [Setting](lua://settings.set) the value to another type will error.
 
 --- @class settings.details: settings.setting Information about a setting. 
---- @field value any? The value of the setting.
+--- @field value settings.value? The value of the setting.
 
 --- Define a new setting, optional specifying various properties about it.
 --- 
@@ -45,14 +51,14 @@ function settings.undefine(name) end
 --- @see settings.unset
 --- 
 --- @param name string The name of the setting to set.
---- @param value any The setting's value. This cannot be `nil`, and must be serialisable by [`textutils.serialize`](lua://textutils.serialize).
+--- @param value settings.value The setting's value. This cannot be `nil`, and must be serialisable by [`textutils.serialize`](lua://textutils.serialize).
 function settings.set(name, value) end
 
 --- Get the value of a setting.
 --- 
 --- @param name string The name of the setting to set.
---- @param default any? The value to use should there be pre-existing value for this setting. If not given, it will use the setting's default value if given, or `nil` otherwise.
---- @return any # The setting's, or the default if the setting has not been changed.
+--- @param default settings.value? The value to use should there be pre-existing value for this setting. If not given, it will use the setting's default value if given, or `nil` otherwise.
+--- @return settings.value? # The setting's, or the default if the setting has not been changed.
 function settings.get(name, default) end
 
 --- Get details about a specific setting.
@@ -87,7 +93,7 @@ function settings.getNames() end
 --- 
 --- @see settings.save
 --- 
---- @param path string? The file to load from. The default path is ".settings" .
+--- @param path string? The file to load from. The default path is `".settings"` .
 --- @return boolean # Whether settings were successfully read from this file. Reasons for failure may include the file not existing or being corrupted.
 function settings.load(path) end
 
@@ -97,7 +103,7 @@ function settings.load(path) end
 --- 
 --- @see settings.load
 --- 
---- @param path string? The path to save settings to. The default path is ".settings" .
+--- @param path string? The path to save settings to. The default path is `".settings"` .
 --- @return boolean # If the settings were successfully saved.
 function settings.save(path) end
 
