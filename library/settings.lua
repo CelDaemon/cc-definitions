@@ -1,5 +1,25 @@
 --- @meta _
 
+--- Read and write configuration options for CraftOS and your programs.
+--- 
+--- When a computer starts, it reads the current value of settings from the `/.settings` file. These values then may be [read](lua://settings.get) or [modified](lua://settings.set).
+--- 
+--- > Warning:
+--- > Calling [`settings.set`](lua://settings.set) does not update the settings file by default. You must call [`settings.save`](lua://settings.save) to persist values.
+--- 
+--- Define an basic setting 123 and read its value:
+--- 
+--- ```lua
+--- settings.define("my.setting", {
+---     description = "An example setting",
+---     default = 123,
+---     type = "number",
+--- })
+--- print("my.setting = " .. settings.get("my.setting")) -- 123
+--- ```
+--- 
+--- You can then use the `set` program to change its value (e.g. `set my.setting 456`), and then re-run the `example` program to check it has changed.    
+--- 
 --- @class settingslib
 settings = {}
 

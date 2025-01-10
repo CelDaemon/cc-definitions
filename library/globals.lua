@@ -107,7 +107,7 @@ function printError(...) end
 --- 
 --- @param replaceChar string? A character to replace each typed character with. This can be used for hiding passwords, for example.
 --- @param history table<integer, string>? A table holding history items that can be scrolled back to with the up/down arrow keys. The oldest item is at index 1, while the newest item is at the highest index.
---- @param completeFn ?fun(partial: string): string[]? A function to be used for completion. This function should take the partial text typed so far, and returns a list of possible completion options.
+--- @param completeFn (fun(partial: string): string[]?)? A function to be used for completion. This function should take the partial text typed so far, and returns a list of possible completion options.
 --- @param default string? Default text which should already be entered into the prompt.
 --- @return string # The text typed in.
 function read(replaceChar, history, completeFn, default) end
