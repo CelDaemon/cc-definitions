@@ -74,6 +74,7 @@ function settings.set(name, value) end
 
 --- Get the value of a setting.
 --- 
+--- @nodiscard
 --- @param name string The name of the setting to set.
 --- @param default settings.value? The value to use should there be pre-existing value for this setting. If not given, it will use the setting's default value if given, or `nil` otherwise.
 --- @return settings.value? # The setting's, or the default if the setting has not been changed.
@@ -81,6 +82,7 @@ function settings.get(name, default) end
 
 --- Get details about a specific setting.
 --- 
+--- @nodiscard
 --- @param name string The name of the setting to get.
 --- @return settings.details # Information about this setting. This includes all information from [`settings.define`](lua://settings.define), as well as this setting's value.
 function settings.getDetails(name) end
@@ -102,6 +104,7 @@ function settings.clear() end
 
 --- Get the names of all currently defined settings.
 --- 
+--- @nodiscard
 --- @return string[] # An alphabetically sorted list of all currently-defined settings.
 function settings.getNames() end
 
@@ -111,6 +114,7 @@ function settings.getNames() end
 --- 
 --- @see settings.save
 --- 
+--- @nodiscard
 --- @param path string? The file to load from. The default path is `".settings"` .
 --- @return boolean # Whether settings were successfully read from this file. Reasons for failure may include the file not existing or being corrupted.
 function settings.load(path) end
@@ -121,8 +125,7 @@ function settings.load(path) end
 --- 
 --- @see settings.load
 --- 
+--- @nodiscard
 --- @param path string? The path to save settings to. The default path is `".settings"` .
 --- @return boolean # If the settings were successfully saved.
 function settings.save(path) end
-
-return settings

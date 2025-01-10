@@ -49,6 +49,7 @@ local pretty = {}
 --- pretty.print(pretty.text("Hello!", colours.blue))
 --- ```
 --- 
+--- @nodiscard
 --- @param text string The string to construct a new document with.
 --- @param colour number? The colour this text should be printed with. If not given, we default to the current colour.
 --- @return document # The document with the provided text.
@@ -63,6 +64,7 @@ function pretty.text(text, colour) end
 --- print(doc1 .. " - " .. doc2) -- Also supports ..
 --- ```
 --- 
+--- @nodiscard
 --- @param ... document | string The documents to concatenate.  
 --- @return document # The concatenated documents.
 function pretty.concat(...) end
@@ -88,6 +90,7 @@ function pretty.concat(...) end
 --- print(pretty.nest(2, pretty.text("foo\nbar")))
 --- ```
 --- 
+--- @nodiscard
 --- @param depth number The number of spaces with which the document should be indented.
 --- @param doc document The document to indent.
 --- @return document # The nested document.
@@ -104,6 +107,7 @@ function pretty.nest(depth, doc) end
 --- print(pretty.render(doc, 20)) -- Collapsed onto one.
 --- ```
 --- 
+--- @nodiscard
 --- @param doc document The document to group.
 --- @return document # The grouped document.
 function pretty.group(doc) end
@@ -122,6 +126,7 @@ function pretty.print(doc, ribbon_frac) end
 
 --- Render a document, converting it into a string.
 --- 
+--- @nodiscard
 --- @param doc document The document to render.
 --- @param width number? The maximum width of this document. Note that long strings will not be wrapped to fit this width - it is only used for finding the best layout.
 --- @param ribbon_frac number The maximum fraction of the width that we should write in. The default is `0.6`.
@@ -146,6 +151,7 @@ function pretty.render(doc, width, ribbon_frac) end
 --- 
 --- @see cc.pretty.pretty_print for a shorthand to prettify and print an object.
 --- 
+--- @nodiscard
 --- @param obj any The object to pretty-print.
 --- @param options pretty.options? Controls how various properties are displayed.
 --- @return document # The object formatted as a document.

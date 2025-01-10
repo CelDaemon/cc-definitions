@@ -23,6 +23,7 @@ local require = {}
 
 --- Build an implementation of Lua's [`package`](lua://package) library, and a [`require`](lua://require) function to load modules within it.
 --- 
+--- @nodiscard
 --- @param env table The environment to load packages into.
 --- @param dir string The directory that relative packages are loaded from.
 --- @return fun(modname: string): any, any # The new [`require`](lua://require) function.

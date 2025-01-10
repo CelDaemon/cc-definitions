@@ -52,6 +52,7 @@ fs = {}
 --- end)
 --- ```
 --- 
+--- @nodiscard
 --- @param path string The path to complete.
 --- @param location string The location where paths are resolved from.
 --- @param include_files boolean? When false, only directories will be included in the returned list. The default is true.
@@ -90,6 +91,7 @@ function fs.complete(path, location, include_files, include_dirs) end
 --- end)
 --- ```
 --- 
+--- @nodiscard
 --- @param path string The path to complete.
 --- @param location string The location where paths are resolved from.
 --- @param options fs.complete_options This table form is an expanded version of the previous syntax. The `include_files` and `include_dirs` arguments from above are passed in as fields.
@@ -115,6 +117,7 @@ function fs.complete(path, location, options) end
 --- fs.find("rom/help/*.md")
 --- ```
 --- 
+--- @nodiscard
 --- @param path string The wildcard-qualified path to search for.
 --- @return string[] # A list of paths that match the search string.
 function fs.find(path) end
@@ -127,6 +130,7 @@ function fs.find(path) end
 --- 
 --- @see fs.getDrive
 --- 
+--- @nodiscard
 --- @param path string The path to check.
 --- @return boolean # If the path is mounted, rather than a normal file/folder.
 function fs.isDriveRoot(path) end
@@ -143,6 +147,7 @@ function fs.isDriveRoot(path) end
 ---     print(files[i])
 --- end
 --- 
+--- @nodiscard
 --- @param path string The path to list.
 --- @return string[] # A table with a list of files in the directory.
 function fs.list(path) end
@@ -159,6 +164,7 @@ function fs.list(path) end
 --- -- => rom/apis/parallel.lua
 --- ```
 --- 
+--- @nodiscard
 --- @param path string The first part of the path. For example, a parent directory path.
 --- @param ... string Additional parts of the path to combine.
 --- @return string # The new path, with separators added between parts as needed.
@@ -173,6 +179,7 @@ function fs.combine(path, ...) end
 --- -- => startup.lua
 --- ```
 --- 
+--- @nodiscard
 --- @param path string The path to get the name from.
 --- @return string # The final part of the path (the file name).
 function fs.getName(path) end
@@ -187,6 +194,7 @@ function fs.getName(path) end
 --- -- => rom
 --- ```
 --- 
+--- @nodiscard
 --- @param path string The path to get the directory from.
 --- @return string # The path with the final part removed (the parent directory).
 function fs.getDir(path) end
@@ -195,24 +203,28 @@ function fs.getDir(path) end
 --- 
 --- Throws if the path doesn't exist.
 --- 
+--- @nodiscard
 --- @param path string The file to get the file size of.
 --- @return number # The size of the file, in bytes.
 function fs.getSize(path) end
 
 --- Returns whether the specified path exists.
 --- 
+--- @nodiscard
 --- @param path string The path to check the existence of.
 --- @return boolean # Whether the path exists.
 function fs.exists(path) end
 
 --- Returns whether the specified path is a directory.
 --- 
+--- @nodiscard
 --- @param path string The path to check.
 --- @return boolean # Whether the path is a directory.
 function fs.isDir(path) end
 
 --- Returns whether a path is read-only.
 --- 
+--- @nodiscard
 --- @param path string The path to check.
 --- @return boolean # Whether the path cannot be written to.
 function fs.isReadOnly(path) end
@@ -267,6 +279,7 @@ function basic_handle.close() end
 --- 
 --- Throws if the file has been closed.
 --- 
+--- @nodiscard
 --- @param whence fs.whence? Where the offset is relative to.
 --- @param offset number? The offset to seek to.
 --- @return number? # The new position, or `nil` if seeking failed.
@@ -280,6 +293,7 @@ local basic_read_handle = {}
 --- 
 --- Throws if the file has been closed.
 --- 
+--- @nodiscard
 --- @return string? # The remaining contents of the file, or `nil` in the event of an error.
 function basic_read_handle.readAll() end
 
@@ -287,6 +301,7 @@ function basic_read_handle.readAll() end
 --- 
 --- Throws if the file has been closed.
 --- 
+--- @nodiscard
 --- @param trailing boolean? Whether to include the newline characters with the returned string. Defaults to false.
 --- @return string? # The read line or `nil` if at the end of the file.
 function basic_read_handle.readLine(trailing) end
@@ -299,6 +314,7 @@ local read_handle = {}
 --- 
 --- Throws when trying to read a negative number of bytes, or if the file has been closed.
 --- 
+--- @nodiscard
 --- @param count number? The number of bytes to read. This may be 0 to determine we are at the end of the file. When absent, a single byte will be read.
 --- @return string? # The bytes read as a string, or `nil` if we are at the end of the file.
 function read_handle.read(count) end
@@ -310,9 +326,15 @@ local read_byte_handle = {}
 --- 
 --- Throws when trying to read a negative number of bytes, or if the file has been closed.
 --- 
+--- @nodiscard
 --- @return number? # The value of the byte read, or `nil` if we are at the end of the file.
 function read_byte_handle.read() end
 
+--- Read a number of bytes from this file.
+--- 
+--- Throws when trying to read a negative number of bytes, or if the file has been closed.
+--- 
+--- @nodiscard
 --- @param count number The number of bytes to read. This may be 0 to determine we are at the end of the file. When absent, a single byte will be read.
 --- @return string? # The bytes read as a string, or `nil` if we are at the end of the file.
 function read_byte_handle.read(count) end
@@ -402,6 +424,7 @@ function write_byte_handle.write(charcode) end
 --- file.close() -- Remember to call close, otherwise changes may not be written!
 --- ```
 --- 
+--- @nodiscard
 --- @param path string The path to the file to open.
 --- @param mode "r" The mode to open the file with.
 --- @return fs.read_handle
@@ -448,52 +471,7 @@ function fs.open(path, mode) end
 --- file.close() -- Remember to call close, otherwise changes may not be written!
 --- ```
 --- 
---- @param path string The path to the file to open.
---- @param mode "rb" The mode to open the file with.
---- @return fs.read_byte_handle
-function fs.open(path, mode) end
-
---- Opens a file for reading or writing at a path.
---- 
---- Throws if an invalid mode was specified.
---- 
---- Read the contents of a file:
---- 
---- ```lua
---- local file = fs.open("/rom/help/intro.txt", "r")
---- local contents = file.readAll()
---- file.close()
----
---- print(contents)
---- ```
---- 
---- Open a file and read all lines into a table. [`io.lines`](lua://io.lines) offers an alternative way to do this.
---- 
---- ```lua
---- local file = fs.open("/rom/motd.txt", "r")
---- local lines = {}
---- while true do
----   local line = file.readLine()
----
----   -- If line is nil then we've reached the end of the file and should stop
----   if not line then break end
----
----   lines[#lines + 1] = line
---- end
----
---- file.close()
----
---- print(lines[math.random(#lines)]) -- Pick a random line and print it.
---- ```
---- 
---- Open a file and write some text to it. You can run `edit out.txt` to see the written text:
---- 
---- ```lua
---- local file = fs.open("out.txt", "w")
---- file.write("Just testing some code")
---- file.close() -- Remember to call close, otherwise changes may not be written!
---- ```
---- 
+--- @nodiscard
 --- @param path string The path to the file to open.
 --- @param mode "w" The mode to open the file with.
 --- @return fs.write_handle
@@ -540,52 +518,7 @@ function fs.open(path, mode) end
 --- file.close() -- Remember to call close, otherwise changes may not be written!
 --- ```
 --- 
---- @param path string The path to the file to open.
---- @param mode "wb" The mode to open the file with.
---- @return fs.write_byte_handle
-function fs.open(path, mode) end
-
---- Opens a file for reading or writing at a path.
---- 
---- Throws if an invalid mode was specified.
---- 
---- Read the contents of a file:
---- 
---- ```lua
---- local file = fs.open("/rom/help/intro.txt", "r")
---- local contents = file.readAll()
---- file.close()
----
---- print(contents)
---- ```
---- 
---- Open a file and read all lines into a table. [`io.lines`](lua://io.lines) offers an alternative way to do this.
---- 
---- ```lua
---- local file = fs.open("/rom/motd.txt", "r")
---- local lines = {}
---- while true do
----   local line = file.readLine()
----
----   -- If line is nil then we've reached the end of the file and should stop
----   if not line then break end
----
----   lines[#lines + 1] = line
---- end
----
---- file.close()
----
---- print(lines[math.random(#lines)]) -- Pick a random line and print it.
---- ```
---- 
---- Open a file and write some text to it. You can run `edit out.txt` to see the written text:
---- 
---- ```lua
---- local file = fs.open("out.txt", "w")
---- file.write("Just testing some code")
---- file.close() -- Remember to call close, otherwise changes may not be written!
---- ```
---- 
+--- @nodiscard
 --- @param path string The path to the file to open.
 --- @param mode "w+" | "r+" The mode to open the file with.
 --- @return fs.read_write_handle
@@ -632,6 +565,101 @@ function fs.open(path, mode) end
 --- file.close() -- Remember to call close, otherwise changes may not be written!
 --- ```
 --- 
+--- @nodiscard
+--- @param path string The path to the file to open.
+--- @param mode "rb" The mode to open the file with.
+--- @return fs.read_byte_handle
+function fs.open(path, mode) end
+
+--- Opens a file for reading or writing at a path.
+--- 
+--- Throws if an invalid mode was specified.
+--- 
+--- Read the contents of a file:
+--- 
+--- ```lua
+--- local file = fs.open("/rom/help/intro.txt", "r")
+--- local contents = file.readAll()
+--- file.close()
+---
+--- print(contents)
+--- ```
+--- 
+--- Open a file and read all lines into a table. [`io.lines`](lua://io.lines) offers an alternative way to do this.
+--- 
+--- ```lua
+--- local file = fs.open("/rom/motd.txt", "r")
+--- local lines = {}
+--- while true do
+---   local line = file.readLine()
+---
+---   -- If line is nil then we've reached the end of the file and should stop
+---   if not line then break end
+---
+---   lines[#lines + 1] = line
+--- end
+---
+--- file.close()
+---
+--- print(lines[math.random(#lines)]) -- Pick a random line and print it.
+--- ```
+--- 
+--- Open a file and write some text to it. You can run `edit out.txt` to see the written text:
+--- 
+--- ```lua
+--- local file = fs.open("out.txt", "w")
+--- file.write("Just testing some code")
+--- file.close() -- Remember to call close, otherwise changes may not be written!
+--- ```
+--- 
+--- @nodiscard
+--- @param path string The path to the file to open.
+--- @param mode "wb" The mode to open the file with.
+--- @return fs.write_byte_handle
+function fs.open(path, mode) end
+
+--- Opens a file for reading or writing at a path.
+--- 
+--- Throws if an invalid mode was specified.
+--- 
+--- Read the contents of a file:
+--- 
+--- ```lua
+--- local file = fs.open("/rom/help/intro.txt", "r")
+--- local contents = file.readAll()
+--- file.close()
+---
+--- print(contents)
+--- ```
+--- 
+--- Open a file and read all lines into a table. [`io.lines`](lua://io.lines) offers an alternative way to do this.
+--- 
+--- ```lua
+--- local file = fs.open("/rom/motd.txt", "r")
+--- local lines = {}
+--- while true do
+---   local line = file.readLine()
+---
+---   -- If line is nil then we've reached the end of the file and should stop
+---   if not line then break end
+---
+---   lines[#lines + 1] = line
+--- end
+---
+--- file.close()
+---
+--- print(lines[math.random(#lines)]) -- Pick a random line and print it.
+--- ```
+--- 
+--- Open a file and write some text to it. You can run `edit out.txt` to see the written text:
+--- 
+--- ```lua
+--- local file = fs.open("out.txt", "w")
+--- file.write("Just testing some code")
+--- file.close() -- Remember to call close, otherwise changes may not be written!
+--- ```
+--- 
+--- @nodiscard
 --- @param path string The path to the file to open.
 --- @param mode "w+b" | "r+b" The mode to open the file with.
 --- @return fs.read_write_byte_handle? # A file handle object for the file, or `nil` if the file does not exist, or cannot be opened.
@@ -649,6 +677,7 @@ function fs.open(path, mode) end
 --- print("/rom/: " .. fs.getDrive("rom"))
 --- ```
 --- 
+--- @nodiscard
 --- @param path string The path to get the drive of.
 --- @return string? # The name of the drive that the file is on; e.g. `hdd` for local files, or `rom` for ROM files.
 function fs.getDrive(path) end
@@ -659,6 +688,7 @@ function fs.getDrive(path) end
 --- 
 --- @see fs.getCapacity To get the capacity of this drive.
 --- 
+--- @nodiscard
 --- @param path string The path to check the free space for.
 --- @return number | "unlimited" # The amount of free space available, in bytes, or `"unlimited"`.
 function fs.getFreeSpace(path) end
@@ -669,6 +699,7 @@ function fs.getFreeSpace(path) end
 --- 
 --- @see fs.getFreeSpace To get the free space available on this drive.
 --- 
+--- @nodiscard
 --- @param path string The path of the drive to get.
 --- @return number? # This drive's capacity. This will be `nil` for "read-only" drives, such as the ROM or treasure disks.
 function fs.getCapacity(path) end
@@ -694,6 +725,7 @@ function fs.getCapacity(path) end
 --- @see fs.getSize
 --- @see fs.isDir
 --- 
+--- @nodiscard
 --- @param path string The path to get attributes for.
 --- @return fs.attributes The resulting attributes.
 function fs.attributes(path) end

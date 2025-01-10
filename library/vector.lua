@@ -166,5 +166,3 @@ function vector:tostring() end
 --- @param other Vector The second vector to compare to.
 --- @return boolean # Whether or not the vectors are equal.
 function vector:equals(other) end
-
-return vector

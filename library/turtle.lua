@@ -500,5 +500,3 @@ function turtle.inspectDown() end
 --- @param detailed boolean? Whether to include "detailed" information. When true the method will contain much more information about the item at the cost of taking longer to run.
 --- @return table? # Information about the given slot, or nil if it is empty.
 function turtle.getItemDetail(slot, detailed) end
-
-return turtle

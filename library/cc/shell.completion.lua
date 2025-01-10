@@ -39,6 +39,7 @@ local completion = {}
 
 --- Complete the name of a file relative to the current working directory.
 --- 
+--- @nodiscard
 --- @param shell table The shell we're completing in.
 --- @param text string Current text to complete.
 --- @return string[] # A list of suffixes of matching files.
@@ -46,6 +47,7 @@ function completion.file(shell, text) end
 
 --- Complete the name of a directory relative to the current working directory.
 --- 
+--- @nodiscard
 --- @param shell table The shell we're completing in.
 --- @param text string Current text to complete.
 --- @return string[] # A list of suffixes of matching directories.
@@ -53,6 +55,7 @@ function completion.dir(shell, text) end
 
 --- Complete the name of a file or directory relative to the current working directory.
 --- 
+--- @nodiscard
 --- @param shell table The shell we're completing in.
 --- @param text string Current text to complete.
 --- @param previous string[] The shell arguments before this one.
@@ -64,6 +67,7 @@ function completion.dirOrFile(shell, text, previous, add_space) end
 --- 
 --- @see shell.completeProgram
 --- 
+--- @nodiscard
 --- @param shell table The shell we're completing in.
 --- @param text string Current text to complete.
 --- @return string[] # A list of suffixes of matching programs.
@@ -71,6 +75,7 @@ function completion.program(shell, text) end
 
 --- Complete arguments of a program.
 --- 
+--- @nodiscard
 --- @param shell table The shell we're completing in.
 --- @param text string Current text to complete.
 --- @param previous string[] The shell arguments before this one.
@@ -90,6 +95,7 @@ function completion.programWithArgs(shell, text, previous, starting) end
 --- 
 --- This accepts a series of single-argument completion functions, and combines them into a function suitable for use with [`shell.setCompletionFunction`](lua://shell.setCompletionFunction).
 --- 
+--- @nodiscard
 --- @param ... cc.shell.completion.source The sources to build.
 --- @return cc.shell.completion.function # The built completion function.
 function completion.build(...) end

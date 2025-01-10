@@ -21,6 +21,7 @@ local strings = {}
 --- end
 --- ```
 --- 
+--- @nodiscard
 --- @param text string The string to wrap.
 --- @param width number? The width to constrain to, defaults to the width of the terminal.
 --- @return string[] # The wrapped input string as a list of lines.
@@ -36,6 +37,7 @@ function strings.wrap(text, width) end
 --- require "cc.strings".ensure_width("a rather long string which is truncated", 20)
 --- ```
 --- 
+--- @nodiscard
 --- @param line string The string to normalise.
 --- @param width number? The width to constrain to, defaults to the width of the terminal.
 --- @return string # The string with a specific width.
@@ -61,6 +63,7 @@ function strings.ensure_width(line, width) end
 --- 
 --- @see table.concat To join strings together.
 --- 
+--- @nodiscard
 --- @param str string The string to split.
 --- @param delimiter string The pattern to split this string on.
 --- @param plain boolean Treat the deliminator as a plain string, rather than a pattern. The default is `false`.

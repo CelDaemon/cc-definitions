@@ -29,6 +29,7 @@ function disk.isPresent(name) end
 --- 
 --- @see disk.setLabel
 --- 
+--- @nodiscard
 --- @param name peripheral.name The name of the disk drive.
 --- @return string? # The name of the current media, or nil if the drive is not present or empty.
 function disk.getLabel(name) end
@@ -45,6 +46,7 @@ function disk.setLabel(name, label) end
 --- 
 --- @see disk.getMountPath
 --- 
+--- @nodiscard
 --- @param name peripheral.name The name of the disk drive.
 --- @return boolean # If the disk is present and provides a mount.
 function disk.hasData(name) end
@@ -53,6 +55,7 @@ function disk.hasData(name) end
 --- 
 --- @see disk.hasData
 --- 
+--- @nodiscard
 --- @param name peripheral.name The name of the disk drive.
 --- @return string? # The mount's directory, or nil if the drive does not contain a floppy or computer.
 function disk.getMountPath(name) end
@@ -61,6 +64,7 @@ function disk.getMountPath(name) end
 --- 
 --- If this returns true, you will can [play](lua://disk.playAudio) the record.
 --- 
+--- @nodiscard
 --- @param name peripheral.name The name of the disk drive.
 --- @return boolean # If the disk is present and has audio saved on it.
 function disk.hasAudio(name) end
@@ -69,6 +73,7 @@ function disk.hasAudio(name) end
 --- 
 --- This generally returns the same as [`disk.getLabel`](lua://disk.getLabel) for records.
 --- 
+--- @nodiscard
 --- @param name peripheral.name The name of the disk drive.
 --- @return string | false? # The track title, false if there is not a music record in the drive or `nil` if no drive is present.
 function disk.getAudioTitle(name) end
@@ -103,8 +108,7 @@ function disk.eject(name) end
 --- 
 --- Note, unlike [`disk.getLabel`](lua://disk.getLabel), this does not return anything for other media, such as computers or turtles.
 --- 
+--- @nodiscard
 --- @param name peripheral.name The name of the disk drive.
 --- @return string? # The disk ID, or `nil` if the drive does not contain a floppy disk.
 function disk.getID(name) end
-
-return disk

@@ -10,12 +10,14 @@ pocket = {}
 --- 
 --- This inventory search starts from the player's currently selected slot, allowing you to prioritise upgrades.
 --- 
+--- @nodiscard
 --- @return boolean # If an item was equipped.
 --- @return string? # The reason an item was not equipped.
 function pocket.equipBack() end
 
 --- Remove the pocket computer's current upgrade.
 --- 
+--- @nodiscard
 --- @return boolean # If the upgrade was unequipped.
 --- @return string # The reason an upgrade was not unequipped.
 function pocket.unequipBack() end
