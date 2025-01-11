@@ -266,7 +266,7 @@ local handle = {}
 --- Throws if the file has already been closed.
 function handle.close() end
 
---- The origin for [`seek`](lua://handle.seek)
+--- The origin for [`seek`](lua://fs.handle.seek).
 --- @alias fs.whence
 --- | "set" # `offset` is relative to the beginning of the file.
 --- | "cur" # Relative to the current position. This is the default.
