@@ -256,17 +256,17 @@ function fs.move(path, dest) end
 --- @param dest string The path to the destination file or directory.
 function fs.copy(path, dest) end
 
---- @class fs.basic_handle
-local basic_handle = {}
+--- @class fs.handle
+local handle = {}
 
 --- Close this file, freeing any resources it uses.
 --- 
 --- Once a file is closed it may no longer be read or written to.
 --- 
 --- Throws if the file has already been closed.
-function basic_handle.close() end
+function handle.close() end
 
---- The origin for [`seek`](lua://basic_handle.seek)
+--- The origin for [`seek`](lua://handle.seek)
 --- @alias fs.whence
 --- | "set" # `offset` is relative to the beginning of the file.
 --- | "cur" # Relative to the current position. This is the default.
@@ -284,10 +284,10 @@ function basic_handle.close() end
 --- @param offset number? The offset to seek to.
 --- @return number? # The new position, or `nil` if seeking failed.
 --- @return string? # The reason seeking failed.
-function basic_handle.seek(whence, offset) end
+function handle.seek(whence, offset) end
 
---- @class fs.basic_read_handle: fs.basic_handle
-local basic_read_handle = {}
+--- @class fs.read_handle: fs.handle
+local read_handle = {}
 
 --- Read the remainder of the file.
 --- 
@@ -295,7 +295,7 @@ local basic_read_handle = {}
 --- 
 --- @nodiscard
 --- @return string? # The remaining contents of the file, or `nil` in the event of an error.
-function basic_read_handle.readAll() end
+function read_handle.readAll() end
 
 --- Read a line from the file.
 --- 
@@ -304,11 +304,7 @@ function basic_read_handle.readAll() end
 --- @nodiscard
 --- @param trailing boolean? Whether to include the newline characters with the returned string. Defaults to false.
 --- @return string? # The read line or `nil` if at the end of the file.
-function basic_read_handle.readLine(trailing) end
-
-
---- @class fs.read_handle: fs.basic_read_handle
-local read_handle = {}
+function read_handle.readLine(trailing) end
 
 --- Read a number of bytes from this file.
 --- 
@@ -319,7 +315,7 @@ local read_handle = {}
 --- @return string? # The bytes read as a string, or `nil` if we are at the end of the file.
 function read_handle.read(count) end
 
---- @class fs.read_byte_handle: fs.basic_read_handle
+--- @class fs.read_byte_handle: fs.read_handle
 local read_byte_handle = {}
 
 --- Read a number of bytes from this file.
@@ -340,7 +336,7 @@ function read_byte_handle.read() end
 function read_byte_handle.read(count) end
 
 
---- @class fs.write_handle: fs.basic_handle
+--- @class fs.write_handle: fs.handle
 local write_handle = {}
 
 --- Write a string or byte to the file.
