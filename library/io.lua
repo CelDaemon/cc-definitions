@@ -201,6 +201,7 @@ local write_handle = {}
 
 --- Write one or more values to the file
 --- 
+--- @nodiscard
 --- @param ... string | number The values to write.
 --- @return io.write_handle? # The current file, allowing chained calls.
 --- @return string? # The error message which occurred while writing.
