@@ -269,6 +269,7 @@ function textutils.unserialise(s) end
 --- @see textutils.json_null Use to serialise a JSON `null` value.
 --- @see textutils.empty_json_array Use to serialise a JSON empty array.
 --- 
+--- @nodiscard
 --- @param t textutils.json  The value to serialise. Like [`textutils.serialise`](lua://textutils.serialise), this should not contain recursive tables or functions.
 --- @param options textutils.json_serialize_options? Options for serialisation.
 --- @return string # The JSON representation of the input.
@@ -311,6 +312,7 @@ function textutils.serializeJSON(t, options) end
 --- @see textutils.json_null Use to serialise a JSON `null` value.
 --- @see textutils.empty_json_array Use to serialise a JSON empty array.
 --- 
+--- @nodiscard
 --- @param t textutils.json  The value to serialise. Like [`textutils.serialise`](lua://textutils.serialise), this should not contain recursive tables or functions.
 --- @param NBTStyle boolean Whether to produce NBT-style JSON (non-quoted keys) instead of standard JSON.
 --- @return string # The JSON representation of the input.
@@ -353,6 +355,7 @@ function textutils.serializeJSON(t, NBTStyle) end
 --- @see textutils.json_null Use to serialise a JSON `null` value.
 --- @see textutils.empty_json_array Use to serialise a JSON empty array.
 --- 
+--- @nodiscardo
 --- @param t textutils.json The value to serialise. Like [`textutils.serialise`](lua://textutils.serialise), this should not contain recursive tables or functions.
 --- @param options textutils.json_serialize_options? Options for serialisation.
 --- @return string # The JSON representation of the input.
@@ -395,6 +398,7 @@ function textutils.serialiseJSON(t, options) end
 --- @see textutils.json_null Use to serialise a JSON `null` value.
 --- @see textutils.empty_json_array Use to serialise a JSON empty array.
 --- 
+--- @nodiscard
 --- @param t textutils.json The value to serialise. Like [`textutils.serialise`](lua://textutils.serialise), this should not contain recursive tables or functions.
 --- @param NBTStyle boolean Whether to produce NBT-style JSON (non-quoted keys) instead of standard JSON.
 --- @return string # The JSON representation of the input.
@@ -431,6 +435,7 @@ function textutils.serialiseJSON(t, NBTStyle) end
 --- @see textutils.json_null Use to serialize a JSON `null` value.
 --- @see textutils.empty_json_array Use to serialize a JSON empty array.
 --- 
+--- @nodiscard
 --- @param s string The serialised string to deserialise.
 --- @param options textutils.json_deserialize_options? Options which control how this JSON object is parsed.
 --- @return textutils.json? # The deserialised object, or `nil` if deserialization failed.
@@ -462,6 +467,7 @@ function textutils.unserializeJSON(s, options) end
 --- @see textutils.json_null Use to serialize a JSON `null` value.
 --- @see textutils.empty_json_array Use to serialize a JSON empty array.
 --- 
+--- @nodiscard
 --- @param s string The serialised string to deserialise.
 --- @param options textutils.json_deserialize_options? Options which control how this JSON object is parsed.
 --- @return textutils.json? # The deserialised object, or `nil` if deserialization failed.
@@ -474,6 +480,7 @@ function textutils.unserialiseJSON(s, options) end
 --- print("https://example.com/?view=" .. textutils.urlEncode("some text&things"))
 --- ```
 --- 
+--- @nodiscard
 --- @param str string The string to encode.
 --- @return string # The encoded string.
 function textutils.urlEncode(str) end
@@ -490,6 +497,7 @@ function textutils.urlEncode(str) end
 --- @see shell.setCompletionFunction
 --- @see read
 --- 
+--- @nodiscard
 --- @param searchText string The partial expression to complete, such as a variable name or table index.
 --- @param searchTable table? The table to find variables in, defaulting to the global environment ([`_G`](lua://_G)). The function also searches the "parent" environment via the `__index` metatable field.
 --- @return string[] # The (possibly empty) list of completions.
