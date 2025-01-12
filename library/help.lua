@@ -2,7 +2,7 @@
 
 
 --- Find help files on the current computer.
---- @class helplib
+--- @class help
 help = {}
 
 --- Returns a colon-separated list of directories where help files are searched for. 

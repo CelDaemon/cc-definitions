@@ -12,7 +12,7 @@
 --- A window may also be flagged as invisible, preventing any changes to it from being rendered until it's flagged as visible once more.
 --- 
 --- A parent terminal object may have multiple children assigned to it, and windows may overlap. For example, the Multishell system functions by assigning each tab a window covering the screen, each using the starting terminal display as its parent, and only one of which is visible at a time.
---- @class windowlib
+--- @class window
 window = {}
 
 --- Returns a terminal object that is a space within the specified parent terminal object. 

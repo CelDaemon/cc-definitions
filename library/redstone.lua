@@ -42,7 +42,7 @@
 --- end
 --- ```
 --- 
---- @class redstonelib
+--- @class redstone
 redstone = {}
 
 --- Returns a table containing the six sides of the computer. 

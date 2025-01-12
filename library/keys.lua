@@ -1,0 +1,138 @@
+--- @meta _
+
+--- Constants for all keyboard "key codes", as queued by the [`key`](lua://events.key) event.
+--- 
+--- These values are not guaranteed to remain the same between versions. 
+--- It is recommended that you use the constants provided by this file, rather than the underlying numerical values.
+--- @class keys
+--- @field space keys.key
+--- @field apostrophe keys.key
+--- @field comma keys.key
+--- @field minus keys.key
+--- @field period keys.key
+--- @field slash keys.key
+--- @field zero keys.key
+--- @field one keys.key
+--- @field two keys.key
+--- @field three keys.key
+--- @field four keys.key
+--- @field five keys.key
+--- @field six keys.key
+--- @field seven keys.key
+--- @field eight keys.key
+--- @field nine keys.key
+--- @field semicolon keys.key
+--- @field equals keys.key
+--- @field a keys.key
+--- @field b keys.key
+--- @field c keys.key
+--- @field d keys.key
+--- @field e keys.key
+--- @field f keys.key
+--- @field g keys.key
+--- @field h keys.key
+--- @field i keys.key
+--- @field j keys.key
+--- @field k keys.key
+--- @field l keys.key
+--- @field m keys.key
+--- @field n keys.key
+--- @field o keys.key
+--- @field p keys.key
+--- @field q keys.key
+--- @field r keys.key
+--- @field s keys.key
+--- @field t keys.key
+--- @field u keys.key
+--- @field v keys.key
+--- @field w keys.key
+--- @field x keys.key
+--- @field y keys.key
+--- @field z keys.key
+--- @field leftBracket keys.key
+--- @field backslash keys.key
+--- @field rightBracket keys.key
+--- @field grave keys.key
+--- @field enter keys.key
+--- @field tab keys.key
+--- @field backspace keys.key
+--- @field insert keys.key
+--- @field delete keys.key
+--- @field right keys.key
+--- @field left keys.key
+--- @field down keys.key
+--- @field up keys.key
+--- @field pageUp keys.key
+--- @field pageDown keys.key
+--- @field home keys.key
+--- @field end keys.key
+--- @field capsLock keys.key
+--- @field scrollLock keys.key
+--- @field numLock keys.key
+--- @field printScreen keys.key
+--- @field pause keys.key
+--- @field f1 keys.key
+--- @field f2 keys.key
+--- @field f3 keys.key
+--- @field f4 keys.key
+--- @field f5 keys.key
+--- @field f6 keys.key
+--- @field f7 keys.key
+--- @field f8 keys.key
+--- @field f9 keys.key
+--- @field f10 keys.key
+--- @field f11 keys.key
+--- @field f12 keys.key
+--- @field f13 keys.key
+--- @field f14 keys.key
+--- @field f15 keys.key
+--- @field f16 keys.key
+--- @field f17 keys.key
+--- @field f18 keys.key
+--- @field f19 keys.key
+--- @field f20 keys.key
+--- @field f21 keys.key
+--- @field f22 keys.key
+--- @field f23 keys.key
+--- @field f24 keys.key
+--- @field f25 keys.key
+--- @field numPad0 keys.key
+--- @field numPad1 keys.key
+--- @field numPad2 keys.key
+--- @field numPad3 keys.key
+--- @field numPad4 keys.key
+--- @field numPad5 keys.key
+--- @field numPad6 keys.key
+--- @field numPad7 keys.key
+--- @field numPad8 keys.key
+--- @field numPad9 keys.key
+--- @field numPadDecimal keys.key
+--- @field numPadDivide keys.key
+--- @field numPadMultiply keys.key
+--- @field numPadSubtract keys.key
+--- @field numPadAdd keys.key
+--- @field numPadEnter keys.key
+--- @field numPadEqual keys.key
+--- @field leftShift keys.key
+--- @field leftCtrl keys.key
+--- @field leftAlt keys.key
+--- @field leftSuper keys.key
+--- @field rightShift keys.key
+--- @field rightCtrl keys.key
+--- @field rightAlt keys.key
+--- @field menu keys.key
+keys = {}
+
+--- @class keys.key
+
+--- Translates a numerical key code to a human-readable name. 
+--- The human-readable name is one of the constants in the keys API.
+--- 
+--- ```lua
+--- keys.getName(keys.enter)
+--- ```
+--- 
+--- @nodiscard
+--- @param code keys.key The key code to look up.
+--- @return string? # The name of the key, or `nil` if not a valid key code.
+function keys.getName(code) end

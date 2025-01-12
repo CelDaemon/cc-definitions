@@ -43,7 +43,7 @@
 --- Some peripherals (namely [speakers](lua://speaker) and Ender and Wireless [modems](lua://modem)) can also be equipped as
 --- upgrades. These are then accessible by accessing the `"left"` or `"right"` peripheral.
 --- 
---- @class turtlelib
+--- @class turtle
 turtle = {}
 
 --- Craft a recipe based on the turtle's inventory.

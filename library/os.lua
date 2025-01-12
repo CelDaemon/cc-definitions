@@ -1,7 +1,7 @@
 --- @meta _
 
 --- The [`os`](lua://os) API allows interacting with the current computer.
---- @class oslib
+--- @class os
 os = {}
 
 --- Loads the given API into the global environment.

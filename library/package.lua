@@ -10,7 +10,7 @@
 --- @return any loaderdata Information about how the module was loaded.
 function require(modname) end
 
---- @class packagelib
+--- @class package
 --- A table used by `require` to control which modules are already loaded.
 --- @field loaded table
 --- The path used by `require` to search for a Lua loader.

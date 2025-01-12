@@ -1,7 +1,7 @@
 --- @meta _
 
 --- Emulates Lua's standard [io library](https://www.lua.org/manual/5.1/manual.html#5.7).
---- @class iolib
+--- @class io
 --- @field stdin io.handle A file handle representing the "standard input".
 --- @field stdout io.handle A file handle representing the "standard output".
 --- @field stderr io.handle A file handle representing the "standard error" stream.

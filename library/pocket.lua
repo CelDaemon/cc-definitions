@@ -3,7 +3,7 @@
 --- Control the current pocket computer, adding or removing upgrades.
 --- 
 --- This API is only available on pocket computers. As such, you may use its presence to determine what kind of computer you are using:
---- @class pocketlib
+--- @class pocket
 pocket = {}
 
 --- Search the player's inventory for another upgrade, replacing the existing one with that item if found.

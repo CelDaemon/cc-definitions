@@ -1,7 +1,7 @@
 --- @meta _
 
 --- Helpful utilities for formatting and manipulating strings.
---- @class textutilslib
+--- @class textutils
 --- A table representing an empty JSON array, in order to distinguish it from an empty JSON object.
 --- 
 --- The contents of this table should not be modified.

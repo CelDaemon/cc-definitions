@@ -20,7 +20,7 @@
 --- 
 --- You can then use the `set` program to change its value (e.g. `set my.setting 456`), and then re-run the `example` program to check it has changed.    
 --- 
---- @class settingslib
+--- @class settings
 settings = {}
 
 --- A type that is used to check the value being set to a setting.

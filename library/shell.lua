@@ -21,7 +21,7 @@
 --- 
 ---    `list` or `list.lua` doesn't exist in `.` (the current directory), so the shell now looks in `/rom/programs`, where `list.lua` can be found!
 --- 3. Finally, the shell reads the file and checks if the file starts with a `#!`. This is a [hashbang](https://en.wikipedia.org/wiki/Shebang_(Unix)), which says that this file shouldn't be treated as Lua, but instead passed to _another_ program, the name of which should follow the `#!`.
---- @class shelllib
+--- @class shell
 shell = {}
 
 

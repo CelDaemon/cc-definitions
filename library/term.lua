@@ -48,7 +48,7 @@
 --- [Combinations of colours](lua://colors.combine) may be accepted, but will only display a single colour (typically following the behaviour of [`colors.toBlit`](lua://colors.toBlit)).
 --- 
 --- The [`paintutils`](lua://paintutils) API provides several helpful functions for displaying graphics using [`term.setBackgroundColour`](lua://term.setBackgroundColour).
---- @class termlib: term.redirect
+--- @class term: term.redirect
 term = {}
 
 --- Get the default palette value for a colour.

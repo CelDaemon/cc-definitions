@@ -23,7 +23,7 @@
 --- 
 --- Most filesystems have a limited capacity, operations which would cause that capacity to be reached (such as writing an incredibly large file) will fail. 
 --- You can see a mount's capacity with [`getCapacity`](lua://fs.getCapacity) and the remaining space with [`getFreeSpace`](lua://fs.getFreeSpace).
---- @class fslib
+--- @class fs
 fs = {}
 
 

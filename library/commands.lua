@@ -17,7 +17,7 @@
 --- commands.setblock("~", "~1", "~", "minecraft:stone")
 --- ```
 --- 
---- @class commandslib: commands.native
+--- @class commands: commands.native
 --- The builtin commands API, without any generated command helper functions.
 --- 
 --- This may be useful if a built-in function (such as [`commands.list`](lua://commands.native.list)) has been overwritten by a command.

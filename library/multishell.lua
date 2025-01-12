@@ -12,7 +12,7 @@
 --- As with [`shell`](lua://shell), [`multishell`](lua://multishell) is not a "true" API. 
 --- Instead, it is a standard program, which launches a shell and injects its API into the shell's environment. 
 --- This API is not available in the global environment, and so is not available to [`APIs`](lua://os.loadAPI).
---- @class multishelllib
+--- @class multishell
 multishell = {}
 
 --- Get the currently visible process. This will be the one selected on the tab bar.
