@@ -1,0 +1,496 @@
+--- @meta _
+
+--- Helpful utilities for formatting and manipulating strings.
+--- @class textutilslib
+--- A table representing an empty JSON array, in order to distinguish it from an empty JSON object.
+--- 
+--- The contents of this table should not be modified.
+--- 
+--- ```lua
+--- textutils.serialiseJSON(textutils.empty_json_array)
+--- ```
+--- 
+--- @see textutils.serialiseJSON
+--- @see textutils.unserialiseJSON
+--- 
+--- @field empty_json_array textutils.json
+--- A table representing the JSON null value.
+--- 
+--- The contents of this table should not be modified.
+--- 
+--- ```lua
+--- textutils.serialiseJSON(textutils.json_null)
+--- ```
+--- 
+--- @see textutils.serialiseJSON
+--- @see textutils.unserialiseJSON
+--- 
+--- @field json_null textutils.json
+textutils = {}
+
+--- Slowly writes string text at current cursor position, character-by-character.
+--- 
+--- Like [`write`](lua://write), this does not insert a newline at the end.
+--- 
+--- ```lua
+--- textutils.slowWrite("Hello, world!")
+--- ```
+--- 
+--- ```lua
+--- textutils.slowWrite("Hello, world!", 5)
+--- ```
+--- 
+--- @param text string The the text to write to the screen.
+--- @param rate number? The number of characters to write each second, Defaults to 20.
+function textutils.slowWrite(text, rate) end
+
+--- Slowly prints string text at current cursor position, character-by-character.
+--- 
+--- Like [`print`](lua://print), this does not insert a newline at the end.
+--- 
+--- ```lua
+--- textutils.slowPrint("Hello, world!")
+--- ```
+--- 
+--- ```lua
+--- textutils.slowPrint("Hello, world!", 5)
+--- ```
+--- 
+--- @param text string The the text to write to the screen.
+--- @param rate number? The number of characters to write each second, Defaults to 20.
+function textutils.slowPrint(text, rate) end
+
+--- Takes input time and formats it in a more readable format such as `6:30 PM`.
+--- 
+--- Print the current in-game time as a 12-hour clock:
+--- 
+--- ```lua
+--- textutils.formatTime(os.time())
+--- ```
+--- 
+--- Print the local time as a 24-hour clock:
+--- 
+--- ```lua
+--- textutils.formatTime(os.time("local"), true)
+--- ```
+--- 
+--- @nodiscard
+--- @param time number The time to format, as provided by [`os.time`](lua://os.time).
+--- @param twentyFourHour boolean? Whether to format this as a 24-hour clock (`18:30`) rather than a 12-hour one (`6:30 AM`).
+--- @return string # The formatted time
+function textutils.formatTime(time, twentyFourHour) end
+
+--- Prints a given string to the display.
+--- 
+--- If the action can be completed without scrolling, it acts much the same as [`print`](lua://print); otherwise, it will throw up a "Press any key to continue" prompt at the bottom of the display. 
+--- Each press will cause it to scroll down and write a single line more before prompting again, if need be.
+--- 
+--- Generates several lines of text and then prints it, paging once the bottom of the terminal is reached:
+--- 
+--- ```lua
+--- local lines = {}
+--- for i = 1, 30 do lines[i] = ("This is line #%d"):format(i) end
+--- local message = table.concat(lines, "\n")
+---
+--- local width, height = term.getCursorPos()
+--- textutils.pagedPrint(message, height - 2)
+--- ```
+--- 
+--- @param text string The text to print to the screen.
+--- @param freeLines number? The number of lines which will be automatically scrolled before the first prompt appears (meaning free_lines + 1 lines will be printed). This can be set to the cursor's y position - 2 to always try to fill the screen. Defaults to 0, meaning only one line is displayed before prompting.
+--- @return number # The number of lines printed.
+function textutils.pagedPrint(text, freeLines) end
+
+--- Prints tables in a structured form.
+--- 
+--- This accepts multiple arguments, either a table or a number. 
+--- When encountering a table, this will be treated as a table row, with each column width being auto-adjusted.
+--- 
+--- When encountering a number, this sets the text color of the subsequent rows to it.
+--- 
+--- ```lua
+--- textutils.tabulate(
+---   colors.orange, { "1", "2", "3" },
+---   colors.lightBlue, { "A", "B", "C" }
+--- )
+--- ```
+--- 
+--- @param ... string[] | number The rows and text colors to display.
+function textutils.tabulate(...) end
+
+--- Prints tables in a structured form, stopping and prompting for input should the result not fit on the terminal.
+--- 
+--- This functions identically to [`textutils.tabulate`](lua://textutils.tabulate), but will prompt for user input should the whole output not fit on the display.
+--- 
+--- Generates a long table, tabulates it, and prints it to the screen:
+--- 
+--- ```lua
+--- local rows = {}
+--- for i = 1, 30 do rows[i] = {("Row #%d"):format(i), math.random(1, 400)} end
+--- 
+--- textutils.pagedTabulate(colors.orange, {"Column", "Value"}, colors.lightBlue, table.unpack(rows))
+--- ```
+--- 
+--- @param ... string[] | number The rows and text colors to display.
+function textutils.pagedTabulate(...) end
+
+--- Options for serialisation.
+--- @alias textutils.value
+--- | number
+--- | string
+--- | boolean
+--- | {[any]: textutils.value?}
+
+--- @class textutils.serialize_options
+--- @field compact boolean? Do not emit indentation and other whitespace between terms.
+--- @field allow_repetitons boolean? Relax the check for recursive tables, allowing them to appear multiple times (as long as tables do not appear inside themselves).
+
+--- Convert a Lua object into a textual representation, suitable for saving in a file or pretty-printing.
+--- 
+--- Throws if the object contains a value which cannot be serialised. 
+--- This includes functions and tables which appear multiple times.
+--- 
+--- Serialise a basic table:
+--- 
+--- ```lua
+--- textutils.serialise({ 1, 2, 3, a = 1, ["another key"] = { true } })
+--- ```
+--- 
+--- Demonstrates some of the other option:
+--- 
+--- ```lua
+--- local tbl = { 1, 2, 3 }
+--- print(textutils.serialise({ tbl, tbl }, { allow_repetitions = true }))
+---
+--- print(textutils.serialise(tbl, { compact = true }))
+--- ```
+--- 
+--- @see cc.pretty.pretty_print An alternative way to display a table, often more suitable for pretty printing.
+--- 
+--- @nodiscard
+--- @param t textutils.value The object to serialise
+--- @param opts textutils.serialize_options? Options for serialisation.
+--- @return string # The serialised representation.
+function textutils.serialize(t, opts) end
+
+--- Convert a Lua object into a textual representation, suitable for saving in a file or pretty-printing.
+--- 
+--- Throws if the object contains a value which cannot be serialised. 
+--- This includes functions and tables which appear multiple times.
+--- 
+--- Serialise a basic table:
+--- 
+--- ```lua
+--- textutils.serialise({ 1, 2, 3, a = 1, ["another key"] = { true } })
+--- ```
+--- 
+--- Demonstrates some of the other option:
+--- 
+--- ```lua
+--- local tbl = { 1, 2, 3 }
+--- print(textutils.serialise({ tbl, tbl }, { allow_repetitions = true }))
+---
+--- print(textutils.serialise(tbl, { compact = true }))
+--- ```
+--- 
+--- @see cc.pretty.pretty_print An alternative way to display a table, often more suitable for pretty printing.
+--- 
+--- @nodiscard
+--- @param t textutils.value The object to serialise
+--- @param opts textutils.serialize_options? Options for serialisation.
+--- @return string # The serialised representation.
+function textutils.serialise(t, opts) end
+
+--- Converts a serialised string back into a reassembled Lua object.
+--- 
+--- This is mainly used together with [`textutils.serialise`](lua://textutils.serialise).
+--- 
+--- @nodiscard
+--- @param s string The serialised string to deserialise.
+--- @return textutils.value? # The deserialised object, or `nil` if the object could not be deserialised.
+function textutils.unserialize(s) end
+
+--- Converts a serialised string back into a reassembled Lua object.
+--- 
+--- This is mainly used together with [`textutils.serialise`](lua://textutils.serialise).
+--- 
+--- @nodiscard
+--- @param s string The serialised string to deserialise.
+--- @return textutils.value? # The deserialised object, or `nil` if the object could not be deserialised.
+function textutils.unserialise(s) end
+
+
+--- @alias textutils.json
+--- | number
+--- | string
+--- | boolean
+--- | {[any]: textutils.json?}
+
+--- Options for serialisation.
+--- @class textutils.json_serialize_options
+--- @field nbt_style boolean? Whether to produce NBT-style JSON (non-quoted keys) instead of standard JSON.
+--- @field unicode_strings boolean? Whether to treat strings as containing UTF-8 characters instead of using the default 8-bit character set.
+--- @field allow_repetitions boolean? Relax the check for recursive tables, allowing them to appear multiple times (as long as tables do not appear inside themselves).
+
+--- Returns a JSON representation of the given data.
+--- 
+--- This is largely intended for interacting with various functions from the [`commands`](lua://commands) API, though may also be used in making [`http`](lua://http) requests.
+--- 
+--- Lua has a rather different data model to Javascript/JSON. 
+--- As a result, some Lua values do not serialise cleanly into JSON.
+--- 
+--- - Lua tables can contain arbitrary key-value pairs, but JSON only accepts arrays, and objects (which require a string key). 
+--- When serialising a table, if it only has numeric keys, then it will be treated as an array. 
+--- Otherwise, the table will be serialised to an object using the string keys. 
+--- Non-string keys (such as numbers or tables) will be dropped.
+--- A consequence of this is that an empty table will always be serialised to an object, not an array. [`textutils.empty_json_array`](lua://textutils.empty_json_array) may be used to express an empty array.
+--- - Lua strings are an a sequence of raw bytes, and do not have any specific encoding. 
+--- However, JSON strings must be valid unicode. 
+--- By default, non-ASCII characters in a string are serialised to their unicode code point (for instance, `"\xfe"` is converted to `"\u00fe"`). 
+--- The `unicode_strings` option may be set to treat all input strings as UTF-8.
+--- - Lua does not distinguish between missing keys (`undefined` in JS) and ones explicitly set to `null`. 
+--- As a result `{ x = nil }` is serialised to `{}`. [`textutils.json_null`](lua://textutils.json_null) may be used to get an explicit null value (`{ x = textutils.json_null }` will serialise to `{"x": null}`).
+--- 
+--- Throws if the object contains a value which cannot be serialised. 
+--- This includes functions and tables which appear multiple times.
+--- 
+--- Serialise a simple object:
+--- 
+--- ```lua
+--- textutils.serialiseJSON({ values = { 1, "2", true } })
+--- ```
+--- 
+--- Serialise an object to a NBT-style string:
+--- 
+--- ```lua
+--- textutils.serialiseJSON({ values = { 1, "2", true } }, { nbt_style = true })
+--- ```
+--- 
+--- @see textutils.json_null Use to serialise a JSON `null` value.
+--- @see textutils.empty_json_array Use to serialise a JSON empty array.
+--- 
+--- @param t textutils.json  The value to serialise. Like [`textutils.serialise`](lua://textutils.serialise), this should not contain recursive tables or functions.
+--- @param options textutils.json_serialize_options? Options for serialisation.
+--- @return string # The JSON representation of the input.
+function textutils.serializeJSON(t, options) end
+
+--- Returns a JSON representation of the given data.
+--- 
+--- This is largely intended for interacting with various functions from the [`commands`](lua://commands) API, though may also be used in making [`http`](lua://http) requests.
+--- 
+--- Lua has a rather different data model to Javascript/JSON. 
+--- As a result, some Lua values do not serialise cleanly into JSON.
+--- 
+--- - Lua tables can contain arbitrary key-value pairs, but JSON only accepts arrays, and objects (which require a string key). 
+--- When serialising a table, if it only has numeric keys, then it will be treated as an array. 
+--- Otherwise, the table will be serialised to an object using the string keys. 
+--- Non-string keys (such as numbers or tables) will be dropped.
+--- A consequence of this is that an empty table will always be serialised to an object, not an array. [`textutils.empty_json_array`](lua://textutils.empty_json_array) may be used to express an empty array.
+--- - Lua strings are an a sequence of raw bytes, and do not have any specific encoding. 
+--- However, JSON strings must be valid unicode. 
+--- By default, non-ASCII characters in a string are serialised to their unicode code point (for instance, `"\xfe"` is converted to `"\u00fe"`). 
+--- The `unicode_strings` option may be set to treat all input strings as UTF-8.
+--- - Lua does not distinguish between missing keys (`undefined` in JS) and ones explicitly set to `null`. 
+--- As a result `{ x = nil }` is serialised to `{}`. [`textutils.json_null`](lua://textutils.json_null) may be used to get an explicit null value (`{ x = textutils.json_null }` will serialise to `{"x": null}`).
+--- 
+--- Throws if the object contains a value which cannot be serialised. 
+--- This includes functions and tables which appear multiple times.
+--- 
+--- Serialise a simple object:
+--- 
+--- ```lua
+--- textutils.serialiseJSON({ values = { 1, "2", true } })
+--- ```
+--- 
+--- Serialise an object to a NBT-style string:
+--- 
+--- ```lua
+--- textutils.serialiseJSON({ values = { 1, "2", true } }, { nbt_style = true })
+--- ```
+--- 
+--- @see textutils.json_null Use to serialise a JSON `null` value.
+--- @see textutils.empty_json_array Use to serialise a JSON empty array.
+--- 
+--- @param t textutils.json  The value to serialise. Like [`textutils.serialise`](lua://textutils.serialise), this should not contain recursive tables or functions.
+--- @param NBTStyle boolean Whether to produce NBT-style JSON (non-quoted keys) instead of standard JSON.
+--- @return string # The JSON representation of the input.
+function textutils.serializeJSON(t, NBTStyle) end
+
+--- Returns a JSON representation of the given data.
+--- 
+--- This is largely intended for interacting with various functions from the [`commands`](lua://commands) API, though may also be used in making [`http`](lua://http) requests.
+--- 
+--- Lua has a rather different data model to Javascript/JSON. 
+--- As a result, some Lua values do not serialise cleanly into JSON.
+--- 
+--- - Lua tables can contain arbitrary key-value pairs, but JSON only accepts arrays, and objects (which require a string key). 
+--- When serialising a table, if it only has numeric keys, then it will be treated as an array. 
+--- Otherwise, the table will be serialised to an object using the string keys. 
+--- Non-string keys (such as numbers or tables) will be dropped.
+--- A consequence of this is that an empty table will always be serialised to an object, not an array. [`textutils.empty_json_array`](lua://textutils.empty_json_array) may be used to express an empty array.
+--- - Lua strings are an a sequence of raw bytes, and do not have any specific encoding. 
+--- However, JSON strings must be valid unicode. 
+--- By default, non-ASCII characters in a string are serialised to their unicode code point (for instance, `"\xfe"` is converted to `"\u00fe"`). 
+--- The `unicode_strings` option may be set to treat all input strings as UTF-8.
+--- - Lua does not distinguish between missing keys (`undefined` in JS) and ones explicitly set to `null`. 
+--- As a result `{ x = nil }` is serialised to `{}`. [`textutils.json_null`](lua://textutils.json_null) may be used to get an explicit null value (`{ x = textutils.json_null }` will serialise to `{"x": null}`).
+--- 
+--- Throws if the object contains a value which cannot be serialised. 
+--- This includes functions and tables which appear multiple times.
+--- 
+--- Serialise a simple object:
+--- 
+--- ```lua
+--- textutils.serialiseJSON({ values = { 1, "2", true } })
+--- ```
+--- 
+--- Serialise an object to a NBT-style string:
+--- 
+--- ```lua
+--- textutils.serialiseJSON({ values = { 1, "2", true } }, { nbt_style = true })
+--- ```
+--- 
+--- @see textutils.json_null Use to serialise a JSON `null` value.
+--- @see textutils.empty_json_array Use to serialise a JSON empty array.
+--- 
+--- @param t textutils.json The value to serialise. Like [`textutils.serialise`](lua://textutils.serialise), this should not contain recursive tables or functions.
+--- @param options textutils.json_serialize_options? Options for serialisation.
+--- @return string # The JSON representation of the input.
+function textutils.serialiseJSON(t, options) end
+
+--- Returns a JSON representation of the given data.
+--- 
+--- This is largely intended for interacting with various functions from the [`commands`](lua://commands) API, though may also be used in making [`http`](lua://http) requests.
+--- 
+--- Lua has a rather different data model to Javascript/JSON. 
+--- As a result, some Lua values do not serialise cleanly into JSON.
+--- 
+--- - Lua tables can contain arbitrary key-value pairs, but JSON only accepts arrays, and objects (which require a string key). 
+--- When serialising a table, if it only has numeric keys, then it will be treated as an array. 
+--- Otherwise, the table will be serialised to an object using the string keys. 
+--- Non-string keys (such as numbers or tables) will be dropped.
+--- A consequence of this is that an empty table will always be serialised to an object, not an array. [`textutils.empty_json_array`](lua://textutils.empty_json_array) may be used to express an empty array.
+--- - Lua strings are an a sequence of raw bytes, and do not have any specific encoding. 
+--- However, JSON strings must be valid unicode. 
+--- By default, non-ASCII characters in a string are serialised to their unicode code point (for instance, `"\xfe"` is converted to `"\u00fe"`). 
+--- The `unicode_strings` option may be set to treat all input strings as UTF-8.
+--- - Lua does not distinguish between missing keys (`undefined` in JS) and ones explicitly set to `null`. 
+--- As a result `{ x = nil }` is serialised to `{}`. [`textutils.json_null`](lua://textutils.json_null) may be used to get an explicit null value (`{ x = textutils.json_null }` will serialise to `{"x": null}`).
+--- 
+--- Throws if the object contains a value which cannot be serialised. 
+--- This includes functions and tables which appear multiple times.
+--- 
+--- Serialise a simple object:
+--- 
+--- ```lua
+--- textutils.serialiseJSON({ values = { 1, "2", true } })
+--- ```
+--- 
+--- Serialise an object to a NBT-style string:
+--- 
+--- ```lua
+--- textutils.serialiseJSON({ values = { 1, "2", true } }, { nbt_style = true })
+--- ```
+--- 
+--- @see textutils.json_null Use to serialise a JSON `null` value.
+--- @see textutils.empty_json_array Use to serialise a JSON empty array.
+--- 
+--- @param t textutils.json The value to serialise. Like [`textutils.serialise`](lua://textutils.serialise), this should not contain recursive tables or functions.
+--- @param NBTStyle boolean Whether to produce NBT-style JSON (non-quoted keys) instead of standard JSON.
+--- @return string # The JSON representation of the input.
+function textutils.serialiseJSON(t, NBTStyle) end
+
+--- Options which control how this JSON object is parsed.
+--- @class textutils.json_deserialize_options
+--- @field nbt_style boolean? When true, this will accept [stringified NBT](https://minecraft.wiki/w/NBT_format) strings, as produced by many commands.
+--- @field parse_null boolean? When true, `null` will be parsed as [`json_null`](lua://textutils.json_null), rather than `nil`.
+--- @field parse_empty_array boolean? When false, empty arrays will be parsed as a new table. By default (or when this value is true), they are parsed as [`empty_json_array`](lua://textutils.empty_json_array).
+
+--- Converts a serialised JSON string back into a reassembled Lua object.
+--- 
+--- This may be used with [`textutils.serializeJSON`](lua://textutils.serializeJSON), or when communicating with command blocks or web APIs.
+--- 
+--- If a `null` value is encountered, it is converted into `nil`. 
+--- It can be converted into [`textutils.json_null`](lua://textutils.json_null) with the `parse_null` option.
+--- 
+--- If an empty array is encountered, it is converted into [`textutils.empty_json_array`](lua://textutils.empty_json_array). 
+--- It can be converted into a new empty table with the `parse_empty_array` option.
+--- 
+--- Unserialise a basic JSON object:
+--- 
+--- ```lua
+--- textutils.unserialiseJSON('{"name": "Steve", "age": null}')
+--- ```
+--- 
+--- Unserialise a basic JSON object, returning null values as [`textutils.json_null`](lua://textutils.json_null):
+--- 
+--- ```lua
+--- textutils.unserialiseJSON('{"name": "Steve", "age": null}', { parse_null = true })
+--- ```
+--- 
+--- @see textutils.json_null Use to serialize a JSON `null` value.
+--- @see textutils.empty_json_array Use to serialize a JSON empty array.
+--- 
+--- @param s string The serialised string to deserialise.
+--- @param options textutils.json_deserialize_options? Options which control how this JSON object is parsed.
+--- @return textutils.json? # The deserialised object, or `nil` if deserialization failed.
+--- @return string? # A message describing why the JSON string is invalid.
+function textutils.unserializeJSON(s, options) end
+
+--- Converts a serialised JSON string back into a reassembled Lua object.
+--- 
+--- This may be used with [`textutils.serializeJSON`](lua://textutils.serializeJSON), or when communicating with command blocks or web APIs.
+--- 
+--- If a `null` value is encountered, it is converted into `nil`. 
+--- It can be converted into [`textutils.json_null`](lua://textutils.json_null) with the `parse_null` option.
+--- 
+--- If an empty array is encountered, it is converted into [`textutils.empty_json_array`](lua://textutils.empty_json_array). 
+--- It can be converted into a new empty table with the `parse_empty_array` option.
+--- 
+--- Unserialise a basic JSON object:
+--- 
+--- ```lua
+--- textutils.unserialiseJSON('{"name": "Steve", "age": null}')
+--- ```
+--- 
+--- Unserialise a basic JSON object, returning null values as [`textutils.json_null`](lua://textutils.json_null):
+--- 
+--- ```lua
+--- textutils.unserialiseJSON('{"name": "Steve", "age": null}', { parse_null = true })
+--- ```
+--- 
+--- @see textutils.json_null Use to serialize a JSON `null` value.
+--- @see textutils.empty_json_array Use to serialize a JSON empty array.
+--- 
+--- @param s string The serialised string to deserialise.
+--- @param options textutils.json_deserialize_options? Options which control how this JSON object is parsed.
+--- @return textutils.json? # The deserialised object, or `nil` if deserialization failed.
+--- @return string? # A message describing why the JSON string is invalid.
+function textutils.unserialiseJSON(s, options) end
+
+--- Replaces certain characters in a string to make it safe for use in URLs or POST data.
+--- 
+--- ```lua
+--- print("https://example.com/?view=" .. textutils.urlEncode("some text&things"))
+--- ```
+--- 
+--- @param str string The string to encode.
+--- @return string # The encoded string.
+function textutils.urlEncode(str) end
+
+--- Provides a list of possible completions for a partial Lua expression.
+--- 
+--- If the completed element is a table, suggestions will have `.` appended to them. 
+--- Similarly, functions have `(` appended to them.
+--- 
+--- ```lua
+--- textutils.complete( "pa", _ENV )
+--- ```
+--- 
+--- @see shell.setCompletionFunction
+--- @see read
+--- 
+--- @param searchText string The partial expression to complete, such as a variable name or table index.
+--- @param searchTable table? The table to find variables in, defaulting to the global environment ([`_G`](lua://_G)). The function also searches the "parent" environment via the `__index` metatable field.
+--- @return string[] # The (possibly empty) list of completions.
+function textutils.complete(searchText, searchTable) end
