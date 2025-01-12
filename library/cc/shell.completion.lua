@@ -97,7 +97,7 @@ function completion.programWithArgs(shell, text, previous, starting) end
 --- 
 --- @nodiscard
 --- @param ... cc.shell.completion.source The sources to build.
---- @return cc.shell.completion.function # The built completion function.
+--- @return shell.completion_function # The built completion function.
 function completion.build(...) end
 
 return completion
