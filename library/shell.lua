@@ -241,6 +241,7 @@ function shell.clearAlias(command) end
 --- @see shell.setAlias
 --- @see shell.resolveProgram This uses aliases when resolving a program name to an absolute path.
 --- 
+--- @nodiscard
 --- @return table<string, string> # A table, where the keys are the names of aliases, and the values are the path to the program.
 function shell.aliases() end
 
